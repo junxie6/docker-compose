@@ -1,4 +1,4 @@
-version: '2.1'
+version: "2.1"
 volumes:
     data-drupal8-src:
         labels:
@@ -10,19 +10,19 @@ volumes:
             com.example.web1.department: "DevOps"
 services:
     db1:
-        hostname: db1.local
+        hostname: "db1.local"
         image: "junhsieh/docker-mysqld"
         volumes:
             - "data-db:/var/lib/mysql"
         environment:
             MYSQL_ROOT_PASSWORD: "foo"
     php1:
-        hostname: php1.local
+        hostname: "php1.local"
         image: "junhsieh/docker-php-fpm"
         volumes:
             - "data-drupal8-src:/var/www/html"
     web1:
-        hostname: web1.local
+        hostname: "web1.local"
         image: "junhsieh/docker-httpd"
         volumes:
             - "data-drupal8-src:/usr/local/apache2/htdocs/drupal8"
