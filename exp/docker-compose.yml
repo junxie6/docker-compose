@@ -1,0 +1,31 @@
+version: '2.1'
+volumes:
+    data-drupal8-src:
+        labels:
+            com.example.web1.description: "Drupal 8 source code"
+            com.example.web1.department: "DevOps"
+    data-db:
+        labels:
+            com.example.web1.description: "MySQL database"
+            com.example.web1.department: "DevOps"
+services:
+    db1:
+        hostname: db1.local
+        image: "junhsieh/docker-mysqld"
+        volumes:
+            - "data-db:/var/lib/mysql"
+        environment:
+            MYSQL_ROOT_PASSWORD: "foo"
+    php1:
+        hostname: php1.local
+        image: "junhsieh/docker-php-fpm"
+        volumes:
+            - "data-drupal8-src:/var/www/html"
+    web1:
+        hostname: web1.local
+        image: "junhsieh/docker-httpd"
+        volumes:
+            - "data-drupal8-src:/usr/local/apache2/htdocs/drupal8"
+        ports:
+            - "80:80"
+  
