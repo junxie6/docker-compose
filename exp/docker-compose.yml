@@ -1,4 +1,4 @@
-version: "2.1"
+version: "2.1" # https://docs.docker.com/compose/compose-file/#version-21
 volumes:
     data-drupal8-src:
         labels:
@@ -8,12 +8,17 @@ volumes:
         labels:
             com.example.web1.description: "MySQL database"
             com.example.web1.department: "DevOps"
+networks:
+    front:
+    back:
 services:
     db1:
         hostname: "db1.local"
         image: "junhsieh/docker-mysqld"
         volumes:
             - "data-db:/var/lib/mysql"
+        networks:
+            - "back"
         environment:
             MYSQL_ROOT_PASSWORD: "foo"
     php1:
@@ -21,11 +26,16 @@ services:
         image: "junhsieh/docker-php-fpm"
         volumes:
             - "data-drupal8-src:/var/www/html"
+        networks:
+            - "front"
+            - "back"
     web1:
         hostname: "web1.local"
         image: "junhsieh/docker-httpd"
         volumes:
             - "data-drupal8-src:/usr/local/apache2/htdocs/drupal8"
+        networks:
+            - "front"
         ports:
             - "80:80"
   
