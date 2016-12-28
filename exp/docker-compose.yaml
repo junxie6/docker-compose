@@ -17,7 +17,7 @@ networks:
     back:
 services:
     db1:
-        hostname: "db1.local"
+        #hostname: "db1.local"
         image: "junhsieh/docker-mysqld"
         volumes:
             - "data-db:/var/lib/mysql"
@@ -26,7 +26,7 @@ services:
         environment:
             MYSQL_ROOT_PASSWORD: "foo"
     php1:
-        hostname: "php1.local"
+        #hostname: "php1.local"
         image: "junhsieh/docker-php-fpm"
         volumes:
             - "data-drupal8-src:/var/www/html"
@@ -34,7 +34,7 @@ services:
             - "front"
             - "back"
     web1:
-        hostname: "web1.local"
+        #hostname: "web1.local"
         image: "junhsieh/docker-httpd"
         volumes:
             - "data-drupal8-src:/usr/local/apache2/htdocs/drupal8"
@@ -42,4 +42,3 @@ services:
             - "front"
         ports:
             - "80:80"
-  
