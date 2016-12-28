@@ -25,7 +25,7 @@ services:
             - "back"
         environment:
             MYSQL_ROOT_PASSWORD: "foo"
-    php1:
+    dru1:
         #hostname: "php1.local"
         image: "junhsieh/docker-php-fpm"
         volumes:
@@ -33,6 +33,12 @@ services:
         networks:
             - "front"
             - "back"
+            ##front:
+            ##    aliases:
+            ##        - "myappip"
+            ##back:
+        #expose:
+        #    - "9000"
     web1:
         #hostname: "web1.local"
         image: "junhsieh/docker-httpd"
@@ -41,4 +47,6 @@ services:
         networks:
             - "front"
         ports:
-            - "80:80"
+            - ":80:80"
+        #expose:
+        #    - "80"
