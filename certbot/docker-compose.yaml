@@ -1,0 +1,34 @@
+version: "3.3" # https://docs.docker.com/compose/compose-file/
+
+volumes:
+    nginx-config:
+        labels:
+            com.example.web1.description: "Nginx configuration"
+            com.example.web1.department: "DevOps"
+
+networks:
+    front:
+        #driver: "bridge"
+        #ipam:
+        #    config:
+        #        - subnet: "172.25.0.0/24"
+    back:
+
+services:
+    certbot:
+        image: "certbot/certbot:latest"
+        networks:
+            - "back"
+        entrypoint: "sh"
+        tty: true
+        restart: "always"
+    nginx:
+        image: "nginx:1.13"
+        volumes:
+            - "nginx-config:/etc/nginx"
+        networks:
+            - "front"
+            - "back"
+        ports:
+            - "80:80"
+        restart: "always"
