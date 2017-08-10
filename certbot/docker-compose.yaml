@@ -1,7 +1,7 @@
 version: "3.3" # https://docs.docker.com/compose/compose-file/
 
 ###
-### certbot certonly --manual --preferred-challenges http -m admin@example.com -d exp1.example.com -d exp2.example.com
+### certbot certonly --manual --preferred-challenges http -m admin@example.com -d exp1.example.com
 ###
 
 volumes:
