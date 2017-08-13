@@ -25,7 +25,7 @@ services:
             - "back"
         entrypoint: "sh"
         tty: true
-        restart: "always"
+        #restart: "always"
     nginx:
         image: "nginx:1.13"
         volumes:
@@ -36,4 +36,4 @@ services:
         ports:
             - "80:80"
             - "443:443"
-        restart: "always"
+        #restart: "always"
