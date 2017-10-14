@@ -1,6 +1,10 @@
-Copy the custom-mysqld-master.cnf:
+Copy the custom-mysqld-master.cnf to the master server:
 
 \# docker cp custom-mysqld-master.cnf mysqlreplication_mysql-master_1:/etc/mysql/mysql.conf.d
+
+Copy the custom-mysqld-slave.cnf to the slave server:
+
+\# docker cp custom-mysqld-slave.cnf mysqlreplication_mysql-slave_1:/etc/mysql/mysql.conf.d
 
 Create a user account for replication:
 
