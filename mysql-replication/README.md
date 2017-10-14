@@ -28,14 +28,15 @@ root@mysql-master # mysql
 
 mysql> GRANT REPLICATION SLAVE ON \*.\* TO 'slave_user'@'192.168.5.8/255.255.255.248' IDENTIFIED BY 'slave_pass';<br>
 mysql> FLUSH PRIVILEGES;<br>
+mysql> exit<br>
 
-Show the grant user command:
+Show the grant user command on master:
 
-\# mysql -e "SELECT CONCAT('mysql -e \"SHOW GRANTS FOR ', '\'', user, '\'', '@', '\'', host, '\'',';\"') AS userHost FROM mysql.user;"
+root@mysql-master # mysql -e "SELECT CONCAT('mysql -e \\"SHOW GRANTS FOR ', '\\'', user, '\\'', '@', '\\'', host, '\\'',';\\"') AS userHost FROM mysql.user;"
 
-Show the create user command:
+Show the create user command on master:
 
-\# mysql -e "SELECT CONCAT('mysql -e \"SHOW CREATE USER ', '\'', user, '\'', '@', '\'', host, '\'',';\"') AS userHost FROM mysql.user;"
+root@mysql-master # mysql -e "SELECT CONCAT('mysql -e \\"SHOW CREATE USER ', '\\'', user, '\\'', '@', '\\'', host, '\\'',';\\"') AS userHost FROM mysql.user;"
 
 
 \# mysql -e "RESET MASTER;"
