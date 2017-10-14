@@ -47,6 +47,6 @@ services:
         networks:
             - "front"
         ports:
-            - ":80:80"
+            - "80:80"
         #expose:
         #    - "80"
