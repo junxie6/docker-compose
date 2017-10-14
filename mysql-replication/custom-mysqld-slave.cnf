@@ -1,0 +1,21 @@
+[mysqld]
+bind_address = 0.0.0.0
+log_error = /var/log/mysql/error.log
+
+innodb_buffer_pool_size = 1G
+max_connections = 200
+
+server_id = 2
+
+# Whether to use compression of the slave/master protocol if both the slave and the master support it.
+slave_compressed_protocol = 1
+
+# Tells the slave server not to start the slave threads when the server starts. To start the threads later, use a START SLAVE statement.
+skip_slave_start
+
+master_info_repository = TABLE
+relay_log_info_repository = TABLE
+relay_log_recovery = ON
+
+replicate_wild_ignore_table = mysql.%
+

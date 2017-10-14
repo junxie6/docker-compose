@@ -1,0 +1,11 @@
+[mysqld]
+bind_address = 0.0.0.0
+log_error = /var/log/mysql/error.log
+
+innodb_buffer_pool_size = 1G
+max_connections = 200
+
+server_id = 1
+log_bin = /var/log/mysql/mysql-bin.log
+expire_logs_days = 10
+
