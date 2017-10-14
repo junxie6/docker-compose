@@ -14,7 +14,15 @@ Copy the custom-mysqld-slave.cnf and the .my.cnf to the slave server and change 
 \# docker cp .my.cnf mysqlreplication_mysql-slave_1:/root<br>
 \# docker exec -it mysqlreplication_mysql-slave_1 chmod 400 /root/.my.cnf<br>
 
-Create a user account for replication:
+Login into the master container:
+
+\# docker exec -it mysqlreplication_mysql-master_1 bash
+
+Login into the slave container:
+
+\# docker exec -it mysqlreplication_mysql-slave_1 bash
+
+Create a user account for replication on master:
 
 mysql> GRANT REPLICATION SLAVE ON *.* TO 'slave_user'@'192.168.5.8/255.255.255.248' IDENTIFIED BY 'slave_pass';<br>
 mysql> FLUSH PRIVILEGES;<br>
