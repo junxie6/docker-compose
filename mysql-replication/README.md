@@ -28,14 +28,14 @@ Show the create user command:
 
 \# mysql -e "RESET SLAVE;"
 
-mysql> CHANGE MASTER TO
-MASTER_HOST='mysql-master',
-MASTER_USER='slave_user',
-MASTER_PASSWORD='slave_pass',
-MASTER_CONNECT_RETRY=60,
-MASTER_LOG_FILE='mysql-bin.000001',
-MASTER_LOG_POS=154
-;
+mysql> CHANGE MASTER TO<br>
+MASTER_HOST='mysql-master',<br>
+MASTER_USER='slave_user',<br>
+MASTER_PASSWORD='slave_pass',<br>
+MASTER_CONNECT_RETRY=60,<br>
+MASTER_LOG_FILE='mysql-bin.000001',<br>
+MASTER_LOG_POS=154<br>
+;<br>
 
 \# mysql -e "START SLAVE;"
 
