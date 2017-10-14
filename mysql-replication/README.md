@@ -25,6 +25,7 @@ Show the create user command:
 ```
 
 \# mysql -e "STOP SLAVE;"
+
 \# mysql -e "RESET SLAVE;"
 
 mysql> CHANGE MASTER TO
