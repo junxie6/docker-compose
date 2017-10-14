@@ -24,6 +24,8 @@ Login into the slave container:
 
 Create a user account for replication on master:
 
+root@mysql-master # mysql
+
 mysql> GRANT REPLICATION SLAVE ON *.* TO 'slave_user'@'192.168.5.8/255.255.255.248' IDENTIFIED BY 'slave_pass';<br>
 mysql> FLUSH PRIVILEGES;<br>
 
