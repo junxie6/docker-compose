@@ -1,0 +1,60 @@
+version: "3.3" # https://docs.docker.com/compose/compose-file/
+
+volumes:
+    mysql-master-data:
+        labels:
+            com.example.mysql-master-data.description: "MySQL datadir"
+            com.example.mysql-master-data.department: "DevOps"
+    mysql-master-config:
+        labels:
+            com.example.mysql-master-config.description: "MySQL config"
+            com.example.mysql-master-config.department: "DevOps"
+    mysql-slave-data:
+        labels:
+            com.example.mysql-slave-data.description: "MySQL datadir"
+            com.example.mysql-slave-data.department: "DevOps"
+    mysql-slave-config:
+        labels:
+            com.example.mysql-slave-config.description: "MySQL config"
+            com.example.mysql-slave-config.department: "DevOps"
+
+networks:
+    #front:
+    back:
+        driver: "bridge"
+        ipam:
+            config:
+                - subnet: "192.168.5.8/29"
+
+services:
+    mysql-master:
+        hostname: "mysql-master.local"
+        image: "mysql:5.7"
+        volumes:
+            - "mysql-master-data:/var/lib/mysql"
+            - "mysql-master-config:/etc/mysql"
+        networks:
+            - "back"
+        ports:
+            - "3601:3600"
+        environment:
+            MYSQL_ROOT_PASSWORD: "foo"
+        #entrypoint: "sh"
+        #tty: true
+        #restart: "always"
+    mysql-slave:
+        hostname: "mysql-slave.local"
+        image: "mysql:5.7"
+        volumes:
+            - "mysql-slave-data:/var/lib/mysql"
+            - "mysql-slave-config:/etc/mysql"
+        networks:
+            - "back"
+        ports:
+            - "3602:3600"
+        environment:
+            MYSQL_ROOT_PASSWORD: "foo"
+        #entrypoint: "sh"
+        #tty: true
+        #restart: "always"
+
