@@ -97,6 +97,8 @@ mysql> exit<br>
 
 root@mysql-slave # mysql -e "START SLAVE;"
 
+**Note:** Because we have set **skip_slave_start** in custom-mysqld-slave.cnf. So, we need to start slave manually.
+
 ##### On slave, show status information on essential parameters of the slave threads:
 
 root@mysql-slave # mysql -e "SHOW SLAVE STATUS \\G;" | grep -E 'Slave_|Master_|Seconds_' | sort -b
