@@ -130,7 +130,7 @@ root@mysql-master # curl -o server_audit.tar.gz https://downloads.mariadb.com/Au
 && chmod 644 /usr/lib/mysql/plugin/server_audit.so \\<br>
 && ls -l /usr/lib/mysql/plugin/server_audit.so<br>
 
-**Note:** Do the same steps above for the slave.
+**Note:** Run the same command above for the slave.
 
 \# docker-compose restart mysql-master<br>
 \# docker-compose restart mysql-slave<br>
