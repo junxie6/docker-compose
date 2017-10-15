@@ -6,21 +6,25 @@
 
 ##### Copy the custom-mysqld-master.cnf and the .my.cnf to the master server and change its permission:
 
-\# docker cp custom-mysqld-master.cnf mysqlreplication_mysql-master_1:/etc/mysql/mysql.conf.d<br>
-\# docker exec -it mysqlreplication_mysql-master_1 chown root:root /etc/mysql/mysql.conf.d/custom-mysqld-master.cnf<br>
-\# docker exec -it mysqlreplication_mysql-master_1 chmod 644 /etc/mysql/mysql.conf.d/custom-mysqld-master.cnf<br>
+\# (
+docker cp custom-mysqld-master.cnf mysqlreplication_mysql-master_1:/etc/mysql/mysql.conf.d<br>
+docker exec -it mysqlreplication_mysql-master_1 chown root:root /etc/mysql/mysql.conf.d/custom-mysqld-master.cnf<br>
+docker exec -it mysqlreplication_mysql-master_1 chmod 644 /etc/mysql/mysql.conf.d/custom-mysqld-master.cnf<br>
 
-\# docker cp .my.cnf mysqlreplication_mysql-master_1:/root<br>
-\# docker exec -it mysqlreplication_mysql-master_1 chmod 400 /root/.my.cnf<br>
+docker cp .my.cnf mysqlreplication_mysql-master_1:/root<br>
+docker exec -it mysqlreplication_mysql-master_1 chmod 400 /root/.my.cnf<br>
+)
 
 ##### Copy the custom-mysqld-slave.cnf and the .my.cnf to the slave server and change its permission:
 
-\# docker cp custom-mysqld-slave.cnf mysqlreplication_mysql-slave_1:/etc/mysql/mysql.conf.d<br>
-\# docker exec -it mysqlreplication_mysql-slave_1 chown root:root /etc/mysql/mysql.conf.d/custom-mysqld-slave.cnf<br>
-\# docker exec -it mysqlreplication_mysql-slave_1 chmod 644 /etc/mysql/mysql.conf.d/custom-mysqld-slave.cnf<br>
+\# (
+docker cp custom-mysqld-slave.cnf mysqlreplication_mysql-slave_1:/etc/mysql/mysql.conf.d<br>
+docker exec -it mysqlreplication_mysql-slave_1 chown root:root /etc/mysql/mysql.conf.d/custom-mysqld-slave.cnf<br>
+docker exec -it mysqlreplication_mysql-slave_1 chmod 644 /etc/mysql/mysql.conf.d/custom-mysqld-slave.cnf<br>
 
-\# docker cp .my.cnf mysqlreplication_mysql-slave_1:/root<br>
-\# docker exec -it mysqlreplication_mysql-slave_1 chmod 400 /root/.my.cnf<br>
+docker cp .my.cnf mysqlreplication_mysql-slave_1:/root<br>
+docker exec -it mysqlreplication_mysql-slave_1 chmod 400 /root/.my.cnf<br>
+)
 
 ##### Restart master and slave containers:
 
@@ -103,11 +107,13 @@ root@mysql-slave # iftop -P
 
 root@mysql-master # bash bench.bash
 
-#### Install audit plugin:
+#### Install server_audit plugin:
 
-\# docker cp custom-mysqld-audit.cnf mysqlreplication_mysql-master_1:/etc/mysql/mysql.conf.d<br>
-\# docker exec -it mysqlreplication_mysql-master_1 chown root:root /etc/mysql/mysql.conf.d/custom-mysqld-audit.cnf<br>
-\# docker exec -it mysqlreplication_mysql-master_1 chmod 644 /etc/mysql/mysql.conf.d/custom-mysqld-audit.cnf<br>
+\# (
+docker cp custom-mysqld-audit.cnf mysqlreplication_mysql-master_1:/etc/mysql/mysql.conf.d<br>
+docker exec -it mysqlreplication_mysql-master_1 chown root:root /etc/mysql/mysql.conf.d/custom-mysqld-audit.cnf<br>
+docker exec -it mysqlreplication_mysql-master_1 chmod 644 /etc/mysql/mysql.conf.d/custom-mysqld-audit.cnf<br>
+)
 
 root@mysql-master # mysql -e "SHOW GLOBAL variables WHERE variable_name REGEXP 'plugin_dir';"
 
