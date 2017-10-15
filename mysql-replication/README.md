@@ -119,6 +119,8 @@ docker exec -it mysqlreplication_mysql-slave_1 chown root:root /etc/mysql/mysql.
 docker exec -it mysqlreplication_mysql-slave_1 chmod 644 /etc/mysql/mysql.conf.d/custom-mysqld-audit.cnf<br>
 )<br>
 
+\# docker exec -it mysqlreplication_mysql-master_1 bash
+
 root@mysql-master # mysql -e "SHOW GLOBAL variables WHERE variable_name REGEXP 'plugin_dir';"
 
 root@mysql-master # curl -o server_audit.tar.gz https://downloads.mariadb.com/Audit-Plugin/MariaDB-Audit-Plugin/server_audit-1.4.0.tar.gz<br>
