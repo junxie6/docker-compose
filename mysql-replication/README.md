@@ -53,7 +53,7 @@ root@mysql-master # mysql -e "SELECT CONCAT('mysql -e \\"SHOW CREATE USER ', '\\
 
 root@mysql-master # mysql -e "RESET MASTER;"
 
-Note: Use this statement with caution to ensure you do not lose binary log file data.
+**Note:** Use this statement with caution to ensure you do not lose binary log file data.
 
 ##### On master, show status information about the binary log files of the master:
 
@@ -71,7 +71,7 @@ root@mysql-slave # mysql -e "STOP SLAVE;"
 
 root@mysql-slave # mysql -e "RESET SLAVE;"
 
-*Note:* This statement is meant to be used for a clean start.
+**Note:** This statement is meant to be used for a clean start.
 
 ##### On slave, change the parameters that the slave server uses for connecting to the master server:
 
