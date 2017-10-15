@@ -14,6 +14,11 @@ Copy the custom-mysqld-slave.cnf and the .my.cnf to the slave server and change 
 \# docker cp .my.cnf mysqlreplication_mysql-slave_1:/root<br>
 \# docker exec -it mysqlreplication_mysql-slave_1 chmod 400 /root/.my.cnf<br>
 
+Restart master and slave containers:
+
+\# docker-compose restart mysql-master<br>
+\# docker-compose restart mysql-slave<br>
+
 Login into the master container:
 
 \# docker exec -it mysqlreplication_mysql-master_1 bash
