@@ -85,6 +85,7 @@ MASTER_CONNECT_RETRY=60,<br>
 MASTER_LOG_FILE='mysql-bin.000001',<br>
 MASTER_LOG_POS=154<br>
 ;<br>
+mysql> exit<br>
 
 On slave, start the slave threads:
 
