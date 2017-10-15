@@ -1,5 +1,10 @@
 # Set up MySQL Master Slave Replication on Docker Containers
 
+##### Clone this repository and switch to the mysql-replication directory:
+
+\# git clone https://github.com/junhsieh/docker-compose.git<br>
+\# cd docker-compose/mysql-replication<br>
+
 ##### Create and start master and slave containers:
 
 \# docker-compose up -d
