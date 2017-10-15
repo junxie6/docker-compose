@@ -123,12 +123,14 @@ docker exec -it mysqlreplication_mysql-slave_1 chmod 644 /etc/mysql/mysql.conf.d
 
 root@mysql-master # mysql -e "SHOW GLOBAL variables WHERE variable_name REGEXP 'plugin_dir';"
 
-root@mysql-master # curl -o server_audit.tar.gz https://downloads.mariadb.com/Audit-Plugin/MariaDB-Audit-Plugin/server_audit-1.4.0.tar.gz<br>
-root@mysql-master # tar zxvf server_audit.tar.gz<br>
-root@mysql-master # cp server_audit-1.4.0/linux-x86-64-glibc_214/server_audit.so /usr/lib/mysql/plugin/<br>
-root@mysql-master # chown root:root /usr/lib/mysql/plugin/server_audit.so<br>
-root@mysql-master # chmod 644 /usr/lib/mysql/plugin/server_audit.so<br>
-root@mysql-master # ls -l /usr/lib/mysql/plugin/server_audit.so<br>
+root@mysql-master # (<br>
+curl -o server_audit.tar.gz https://downloads.mariadb.com/Audit-Plugin/MariaDB-Audit-Plugin/server_audit-1.4.0.tar.gz<br>
+tar zxvf server_audit.tar.gz<br>
+cp server_audit-1.4.0/linux-x86-64-glibc_214/server_audit.so /usr/lib/mysql/plugin/<br>
+chown root:root /usr/lib/mysql/plugin/server_audit.so<br>
+chmod 644 /usr/lib/mysql/plugin/server_audit.so<br>
+ls -l /usr/lib/mysql/plugin/server_audit.so<br>
+)<br>
 
 **Note:** Do the same steps above for the slave.
 
