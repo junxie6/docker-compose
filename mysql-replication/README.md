@@ -86,6 +86,12 @@ MASTER_LOG_FILE='mysql-bin.000001',<br>
 MASTER_LOG_POS=154<br>
 ;<br>
 
-\# mysql -e "START SLAVE;"
+On slave, start the slave threads:
 
-\# mysql -e "SHOW SLAVE STATUS \G;"
+root@mysql-slave # mysql -e "START SLAVE;"
+
+On slave, show status information on essential parameters of the slave threads:
+
+root@mysql-slave # mysql -e "SHOW SLAVE STATUS \\G;"
+
+
