@@ -93,6 +93,6 @@ root@mysql-slave # mysql -e "START SLAVE;"
 
 On slave, show status information on essential parameters of the slave threads:
 
-root@mysql-slave # mysql -e "SHOW SLAVE STATUS \\G;"
+root@mysql-slave # mysql -e "SHOW SLAVE STATUS \\G;" | grep -E 'Slave_|Master_'
 
 
