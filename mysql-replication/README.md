@@ -108,13 +108,13 @@ root@mysql-slave # mysql -e "START SLAVE;"
 
 root@mysql-slave # mysql -e "SHOW SLAVE STATUS \\G;" | grep -E 'Slave_|Master_|Seconds_' | sort -b
 
-#### Benchmark the slave compressed protocol:
+##### Benchmark the slave compressed protocol:
 
 root@mysql-slave # iftop -P
 
 root@mysql-master # bash bench.bash
 
-#### Install server_audit plugin:
+##### Install server_audit plugin:
 
 \# (<br>
 docker cp custom-mysqld-audit.cnf mysqlreplication_mysql-master_1:/etc/mysql/mysql.conf.d<br>
@@ -147,3 +147,8 @@ root@mysql-master # curl -o server_audit.tar.gz https://downloads.mariadb.com/Au
 root@mysql-master # mysql -e "SHOW GLOBAL variables WHERE variable_name REGEXP 'server_audit' AND variable_name != 'server_audit_loc_info';"<br>
 root@mysql-master # tail /var/log/mysql/audit.log<br>
 
+##### Reference:
+
+https://mariadb.com/resources/blog/introducing-mariadb-audit-plugin
+
+https://www.percona.com/blog/2016/02/15/mysql-mariadb-with-mariadb-auditing-plugin/
