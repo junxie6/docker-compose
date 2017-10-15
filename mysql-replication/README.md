@@ -113,6 +113,10 @@ root@mysql-master # bash bench.bash
 docker cp custom-mysqld-audit.cnf mysqlreplication_mysql-master_1:/etc/mysql/mysql.conf.d<br>
 docker exec -it mysqlreplication_mysql-master_1 chown root:root /etc/mysql/mysql.conf.d/custom-mysqld-audit.cnf<br>
 docker exec -it mysqlreplication_mysql-master_1 chmod 644 /etc/mysql/mysql.conf.d/custom-mysqld-audit.cnf<br>
+
+docker cp custom-mysqld-audit.cnf mysqlreplication_mysql-slave_1:/etc/mysql/mysql.conf.d<br>
+docker exec -it mysqlreplication_mysql-slave_1 chown root:root /etc/mysql/mysql.conf.d/custom-mysqld-audit.cnf<br>
+docker exec -it mysqlreplication_mysql-slave_1 chmod 644 /etc/mysql/mysql.conf.d/custom-mysqld-audit.cnf<br>
 )<br>
 
 root@mysql-master # mysql -e "SHOW GLOBAL variables WHERE variable_name REGEXP 'plugin_dir';"
