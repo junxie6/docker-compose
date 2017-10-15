@@ -111,15 +111,15 @@ root@mysql-master # bash bench.bash
 
 root@mysql-master # mysql -e "SHOW GLOBAL variables WHERE variable_name REGEXP 'plugin_dir';"
 
-root@mysql-master # curl -o server_audit.tar.gz https://downloads.mariadb.com/Audit-Plugin/MariaDB-Audit-Plugin/server_audit-1.4.0.tar.gz
-root@mysql-master # tar zxvf server_audit.tar.gz
-root@mysql-master # cp server_audit-1.4.0/linux-x86-64-glibc_214/server_audit.so /usr/lib/mysql/plugin/
-root@mysql-master # chown root:root /usr/lib/mysql/plugin/server_audit.so
-root@mysql-master # chmod 644 /usr/lib/mysql/plugin/server_audit.so
-root@mysql-master # ls -l /usr/lib/mysql/plugin/server_audit.so
+root@mysql-master # curl -o server_audit.tar.gz https://downloads.mariadb.com/Audit-Plugin/MariaDB-Audit-Plugin/server_audit-1.4.0.tar.gz<br>
+root@mysql-master # tar zxvf server_audit.tar.gz<br>
+root@mysql-master # cp server_audit-1.4.0/linux-x86-64-glibc_214/server_audit.so /usr/lib/mysql/plugin/<br>
+root@mysql-master # chown root:root /usr/lib/mysql/plugin/server_audit.so<br>
+root@mysql-master # chmod 644 /usr/lib/mysql/plugin/server_audit.so<br>
+root@mysql-master # ls -l /usr/lib/mysql/plugin/server_audit.so<br>
 
 \# docker-compose restart mysql-master
 
-root@mysql-master # mysql -e "SHOW GLOBAL variables WHERE variable_name REGEXP 'server_audit' AND variable_name != 'server_audit_loc_info';"
-root@mysql-master # tail /var/log/mysql/audit.log
+root@mysql-master # mysql -e "SHOW GLOBAL variables WHERE variable_name REGEXP 'server_audit' AND variable_name != 'server_audit_loc_info';"<br>
+root@mysql-master # tail /var/log/mysql/audit.log<br>
 
