@@ -52,6 +52,8 @@ root@mysql-master # mysql -e "SHOW MASTER STATUS \G;"
          Position: 154
 ```
 
+Stop the slave threads:
+
 \# mysql -e "STOP SLAVE;"
 
 Clear the master info and relay log info repositories, deletes all the relay log files, and starts a new relay log file:
