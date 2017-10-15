@@ -99,7 +99,7 @@ root@mysql-slave # mysql -e "SHOW SLAVE STATUS \\G;" | grep -E 'Slave_|Master_|S
 
 #### Benchmark the slave compressed protocol:
 
-root@mysql-master # bash bench.bash
-
 root@mysql-slave # iftop -P
+
+root@mysql-master # bash bench.bash
 
