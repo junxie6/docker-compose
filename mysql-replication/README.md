@@ -38,10 +38,15 @@ Show the create user command on master:
 
 root@mysql-master # mysql -e "SELECT CONCAT('mysql -e \\"SHOW CREATE USER ', '\\'', user, '\\'', '@', '\\'', host, '\\'',';\\"') AS userHost FROM mysql.user;"
 
+Deletes all binary log files listed in the index file, resets the binary log index file to be empty, and creates a new binary log file:
 
-\# mysql -e "RESET MASTER;"
+root@mysql-master # mysql -e "RESET MASTER;"
 
-\# mysql -e "SHOW MASTER STATUS \G;"
+Note: Use this statement with caution to ensure you do not lose binary log file data.
+
+Show status information about the binary log files of the master:
+
+root@mysql-master # mysql -e "SHOW MASTER STATUS \G;"
 ```
              File: mysql-bin.000001
          Position: 154
@@ -49,7 +54,11 @@ root@mysql-master # mysql -e "SELECT CONCAT('mysql -e \\"SHOW CREATE USER ', '\\
 
 \# mysql -e "STOP SLAVE;"
 
+Clear the master info and relay log info repositories, deletes all the relay log files, and starts a new relay log file:
+
 \# mysql -e "RESET SLAVE;"
+
+Note: This statement is meant to be used for a clean start.
 
 mysql> CHANGE MASTER TO<br>
 MASTER_HOST='mysql-master',<br>
