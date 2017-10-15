@@ -128,7 +128,10 @@ root@mysql-master # chown root:root /usr/lib/mysql/plugin/server_audit.so<br>
 root@mysql-master # chmod 644 /usr/lib/mysql/plugin/server_audit.so<br>
 root@mysql-master # ls -l /usr/lib/mysql/plugin/server_audit.so<br>
 
-\# docker-compose restart mysql-master
+**Note:** Do the same steps above for the slave.
+
+\# docker-compose restart mysql-master<br>
+\# docker-compose restart mysql-slave<br>
 
 root@mysql-master # mysql -e "SHOW GLOBAL variables WHERE variable_name REGEXP 'server_audit' AND variable_name != 'server_audit_loc_info';"<br>
 root@mysql-master # tail /var/log/mysql/audit.log<br>
