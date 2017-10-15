@@ -14,6 +14,9 @@ relay_log_info_repository = TABLE
 relay_log_recovery = ON
 
 replicate_wild_ignore_table = mysql.%
+replicate_wild_ignore_table = information_schema.%
+replicate_wild_ignore_table = performance_schema.%
+replicate_wild_ignore_table = sys.%
 
 ### Whether to use compression of the slave/master protocol if both the slave and the master support it.
 slave_compressed_protocol = 1
