@@ -51,7 +51,7 @@ Note: Use this statement with caution to ensure you do not lose binary log file 
 
 Show status information about the binary log files of the master:
 
-root@mysql-master # mysql -e "SHOW MASTER STATUS \G;"
+root@mysql-master # mysql -e "SHOW MASTER STATUS \\G;"
 ```
              File: mysql-bin.000001
          Position: 154
