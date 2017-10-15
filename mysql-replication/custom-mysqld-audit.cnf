@@ -1,0 +1,37 @@
+[mysqld]
+### load server_audit plugin
+plugin_load=server_audit=server_audit.so
+
+### Specifies the events you wish to have in the log. By default the value is empty,
+### which means that all events are recorded.
+###
+### The options are:
+### CONNECTION - users connecting and disconnecting.
+### QUERY - queries and their result.
+### TABLE - which tables are affected by the queries.
+#server_audit_events=CONNECT,QUERY
+
+### enable logging
+server_audit_logging=ON
+
+### any users who don't need auditing (csv)
+#server_audit_excl_users='root'
+# or can use server_audit_incl_users='some-other-user'
+
+###############################################################################
+### Log destination could be either "flat file" or "syslog". It is dangerous to configure both,
+### so pick one of themfor your logging strategy:
+###############################################################################
+
+### flat file
+server_audit_output_type=FILE
+server_audit_file_path=/var/log/mysql/audit.log
+server_audit_file_rotate_size=1000000
+server_audit_file_rotations=9
+
+### syslog
+#server_audit_output_type=SYSLOG
+#server_audit_syslog_facility=LOG_LOCAL6
+#server_audit_syslog_ident=mysql_audit
+#server_audit_syslog_info=this-host.name
+#server_audit_syslog_priority=LOG_INFO

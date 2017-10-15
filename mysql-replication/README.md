@@ -103,3 +103,23 @@ root@mysql-slave # iftop -P
 
 root@mysql-master # bash bench.bash
 
+#### Install audit plugin:
+
+\# docker cp custom-mysqld-audit.cnf mysqlreplication_mysql-master_1:/etc/mysql/mysql.conf.d<br>
+\# docker exec -it mysqlreplication_mysql-master_1 chown root:root /etc/mysql/mysql.conf.d/custom-mysqld-audit.cnf<br>
+\# docker exec -it mysqlreplication_mysql-master_1 chmod 644 /etc/mysql/mysql.conf.d/custom-mysqld-audit.cnf<br>
+
+root@mysql-master # mysql -e "SHOW GLOBAL variables WHERE variable_name REGEXP 'plugin_dir';"
+
+root@mysql-master # curl -o server_audit.tar.gz https://downloads.mariadb.com/Audit-Plugin/MariaDB-Audit-Plugin/server_audit-1.4.0.tar.gz
+root@mysql-master # tar zxvf server_audit.tar.gz
+root@mysql-master # cp server_audit-1.4.0/linux-x86-64-glibc_214/server_audit.so /usr/lib/mysql/plugin/
+root@mysql-master # chown root:root /usr/lib/mysql/plugin/server_audit.so
+root@mysql-master # chmod 644 /usr/lib/mysql/plugin/server_audit.so
+root@mysql-master # ls -l /usr/lib/mysql/plugin/server_audit.so
+
+\# docker-compose restart mysql-master
+
+root@mysql-master # mysql -e "SHOW GLOBAL variables WHERE variable_name REGEXP 'server_audit' AND variable_name != 'server_audit_loc_info';"
+root@mysql-master # tail /var/log/mysql/audit.log
+
