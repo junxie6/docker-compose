@@ -6,6 +6,7 @@ innodb_buffer_pool_size = 1G
 max_connections = 200
 
 server_id = 1
-log_bin = /var/log/mysql/mysql-bin.log
+
+log_bin = /var/log/mysql/mysql-bin
 expire_logs_days = 10
 
