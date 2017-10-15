@@ -33,7 +33,7 @@ Login into the slave container:
 
 \# docker exec -it mysqlreplication_mysql-slave_1 bash
 
-Create a user account for replication on master:
+On master, create a user account for replication:
 
 root@mysql-master # mysql
 
@@ -41,11 +41,11 @@ mysql> GRANT REPLICATION SLAVE ON \*.\* TO 'slave_user'@'192.168.5.8/255.255.255
 mysql> FLUSH PRIVILEGES;<br>
 mysql> exit<br>
 
-Show the grant user command on master:
+On master, show the grant user command:
 
 root@mysql-master # mysql -e "SELECT CONCAT('mysql -e \\"SHOW GRANTS FOR ', '\\'', user, '\\'', '@', '\\'', host, '\\'',';\\"') AS userHost FROM mysql.user;"
 
-Show the create user command on master:
+On master, show the create user command:
 
 root@mysql-master # mysql -e "SELECT CONCAT('mysql -e \\"SHOW CREATE USER ', '\\'', user, '\\'', '@', '\\'', host, '\\'',';\\"') AS userHost FROM mysql.user;"
 
@@ -55,7 +55,7 @@ root@mysql-master # mysql -e "RESET MASTER;"
 
 Note: Use this statement with caution to ensure you do not lose binary log file data.
 
-Show status information about the binary log files of the master:
+On master, show status information about the binary log files of the master:
 
 root@mysql-master # mysql -e "SHOW MASTER STATUS \\G;"
 ```
@@ -63,15 +63,19 @@ root@mysql-master # mysql -e "SHOW MASTER STATUS \\G;"
          Position: 154
 ```
 
-Stop the slave threads:
+On slave, stop the slave threads:
 
-\# mysql -e "STOP SLAVE;"
+root@mysql-slave # mysql -e "STOP SLAVE;"
 
-Clear the master info and relay log info repositories, deletes all the relay log files, and starts a new relay log file:
+On slave, clear the master info and relay log info repositories, deletes all the relay log files, and starts a new relay log file:
 
-\# mysql -e "RESET SLAVE;"
+root@mysql-slave # mysql -e "RESET SLAVE;"
 
 Note: This statement is meant to be used for a clean start.
+
+On slave, change the parameters that the slave server uses for connecting to the master server:
+
+root@mysql-slave # mysql
 
 mysql> CHANGE MASTER TO<br>
 MASTER_HOST='mysql-master',<br>
