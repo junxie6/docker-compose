@@ -1,4 +1,4 @@
-# Set up MySQL Master Slave Replication
+# Set up MySQL Master Slave Replication on Docker Containers
 
 ##### Create and start master and slave containers:
 
