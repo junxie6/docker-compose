@@ -1,0 +1,67 @@
+version: "3.7" # https://docs.docker.com/compose/compose-file/#version-21
+
+volumes:
+    es-data:
+        labels:
+            com.example.es.description: "ES data"
+            com.example.es.department: "DevOps"
+
+#networks:
+#    front:
+#        driver: "bridge"
+#        ipam:
+#            config:
+#                - subnet: "192.168.5.8/29"
+#    back:
+
+services:
+    main:
+        image: "exp/main:0.0.0"
+        network_mode: "host"
+        logging:
+        #    driver: "syslog"
+            options:
+        #        syslog-address: "udp://127.0.0.1:514"
+                tag: "app-main"
+    nginx:
+        image: "nginx:1.15"
+        network_mode: "host"
+        #networks:
+        #    - "front"
+        logging:
+            driver: "syslog"
+            options:
+                syslog-address: "udp://127.0.0.1:514"
+                tag: "app-nginx"
+                #syslog-format: "rfc3164"
+                #syslog-facility: "daemon"
+                #https://docs.docker.com/config/containers/logging/syslog/#options
+    rsyslog:
+        image: "voxxit/rsyslog"
+        network_mode: "host"
+        logging:
+            driver: "syslog"
+            options:
+                syslog-address: "udp://127.0.0.1:514"
+                tag: "app-rsyslog"
+    filebeat:
+        image: "docker.elastic.co/beats/filebeat-oss:6.4.2"
+        network_mode: "host"
+    es:
+        image: "docker.elastic.co/elasticsearch/elasticsearch-oss:6.4.2"
+        network_mode: "host"
+        volumes:
+            - "es-data:/usr/share/elasticsearch/data"
+    #kibana:
+    #    image: "docker.elastic.co/kibana/kibana-oss:6.4.2"
+    #    #image: "blacktop/kibana"
+    #    network_mode: "host"
+    #    #command: [ "/bin/bash", "-c", "/usr/share/kibana/bin/kibana-plugin remove x-pack; /usr/local/bin/kibana-docker" ]
+    #    environment:
+    #        - ELASTICSEARCH_URL="http://127.0.0.1:9200/"
+    #        #- XPACK_ML_ENABLED=false
+    #        #- XPACK_GRAPH_ENABLED=false
+    #        #- XPACK_MONITORING_ENABLED=false
+    #        #- XPACK_REPORTING_ENABLED=false
+    #        #- XPACK_SECURITY_ENABLED=false
+
