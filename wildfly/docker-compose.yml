@@ -1,0 +1,14 @@
+version: "3.7" # https://docs.docker.com/compose/compose-file/
+
+### Reference:
+### https://stackoverflow.com/questions/51622117/issue-with-dns-naming-and-certificates-ldap-context
+### https://stackoverflow.com/questions/27922219/how-to-change-default-port-8080-in-wildfly
+
+services:
+    wildfly:
+        image: "jboss/wildfly:14.0.1.Final"
+        network_mode: "host"
+        sysctls:
+            - net.ipv4.ip_unprivileged_port_start=80
+        ### Warning: Do not use the -Dcom.sun.jndi.ldap.object.disableEndpointIdentification=true option on production.
+        command: ["/opt/jboss/wildfly/bin/standalone.sh", "-Djboss.bind.address=0.0.0.0", "-Djboss.http.port=80", "-Djboss.https.port=443", "-Djboss.bind.address.management=0.0.0.0", "-Dcom.sun.jndi.ldap.object.disableEndpointIdentification=true"]

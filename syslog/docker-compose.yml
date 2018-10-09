@@ -1,4 +1,4 @@
-version: "3.7" # https://docs.docker.com/compose/compose-file/#version-21
+version: "3.7" # https://docs.docker.com/compose/compose-file/
 
 volumes:
     es-data:
