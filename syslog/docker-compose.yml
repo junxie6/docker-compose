@@ -18,11 +18,13 @@ services:
     main:
         image: "exp/main:0.0.0"
         network_mode: "host"
-        logging:
-        #    driver: "syslog"
-            options:
-        #        syslog-address: "udp://127.0.0.1:514"
-                tag: "app-main"
+        volumes:
+            - "/QA_files:/QA_files:rw"
+        #logging:
+        ##    driver: "syslog"
+        #    options:
+        ##        syslog-address: "udp://127.0.0.1:514"
+        #        tag: "app-main"
     nginx:
         image: "nginx:1.15"
         network_mode: "host"
