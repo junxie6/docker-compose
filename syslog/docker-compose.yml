@@ -33,6 +33,12 @@ services:
             #REGISTRY_HTTP_TLS_CERTIFICATE: /etc/letsencrypt/live/LETSENCRYPT_DOMAINS_ENV_VAR/fullchain.pem
             #REGISTRY_HTTP_TLS_KEY: /etc/letsencrypt/live/LETSENCRYPT_DOMAINS_ENV_VAR/privkey.pem
         restart: "always"
+    static:
+        image: "exp/static:0.0.0"
+        network_mode: "host"
+        volumes:
+            - "web-data:/web_static"
+        tty: true
     main:
         image: "exp/main:0.0.0"
         network_mode: "host"
