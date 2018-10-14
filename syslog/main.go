@@ -13,7 +13,7 @@ import (
 
 func handler(w http.ResponseWriter, r *http.Request) {
 	fmt.Printf("Hello World\n")
-	fmt.Fprintf(w, "Hi there, I love %s!", r.URL.Path[1:])
+	fmt.Fprintf(w, "1: %s!", r.URL.Path[1:])
 }
 
 func main() {

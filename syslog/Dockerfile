@@ -3,17 +3,21 @@
 FROM ubuntu:16.04
 
 #
-ENV TZ 'Asia/Shanghai'
+ENV TZ Asia/Shanghai
 
 RUN echo $TZ > /etc/timezone \
   && apt-get -y update && apt-get install -y tzdata \
   && rm /etc/localtime \
   && ln -snf /usr/share/zoneinfo/$TZ /etc/localtime \
   && dpkg-reconfigure -f noninteractive tzdata \
-  && apt-get clean
+  && apt-get clean \
+  && rm -rf /var/lib/apt/lists/*
 
 #
-RUN apt-get -y update && apt-get -y install vim tree git curl htop less wget procps iproute dnsutils netcat-openbsd ca-certificates
+RUN apt-get -y update \
+  && apt-get -y install vim tree git curl htop less wget procps iproute dnsutils netcat-openbsd ca-certificates \
+  && apt-get clean \
+  && rm -rf /var/lib/apt/lists/*
 
 COPY main /usr/local/bin
 
