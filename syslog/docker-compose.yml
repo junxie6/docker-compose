@@ -1,10 +1,14 @@
 version: "3.7" # https://docs.docker.com/compose/compose-file/
 
 volumes:
+    registry-data:
+        labels:
+            com.example.registry-data.description: "ES data"
+            com.example.registry-data.department: "DevOps"
     es-data:
         labels:
-            com.example.es.description: "ES data"
-            com.example.es.department: "DevOps"
+            com.example.es-data.description: "ES data"
+            com.example.es-data.department: "DevOps"
 
 #networks:
 #    front:
@@ -15,6 +19,16 @@ volumes:
 #    back:
 
 services:
+    registry:
+        image: "registry:2.6.2"
+        network_mode: "host"
+        volumes:
+            - "registry-data:/var/lib/registry"
+        environment:
+            REGISTRY_HTTP_SECRET: "your-http-secret"
+            #REGISTRY_HTTP_TLS_CERTIFICATE: /etc/letsencrypt/live/LETSENCRYPT_DOMAINS_ENV_VAR/fullchain.pem
+            #REGISTRY_HTTP_TLS_KEY: /etc/letsencrypt/live/LETSENCRYPT_DOMAINS_ENV_VAR/privkey.pem
+        restart: "always"
     main:
         image: "exp/main:0.0.0"
         network_mode: "host"
