@@ -33,5 +33,5 @@ RUN chmod 755 /usr/local/bin/main \
 
 USER jboss
 
-CMD /usr/local/bin/main
+CMD ["/usr/local/bin/main"]
 
