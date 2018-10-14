@@ -21,7 +21,7 @@ services:
         volumes:
             - "/QA_files:/QA_files:rw"
         environment:
-          TZ: Asia/Shanghai
+            TZ: Asia/Shanghai
         #logging:
         ##    driver: "syslog"
         #    options:
