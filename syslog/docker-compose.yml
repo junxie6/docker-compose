@@ -9,6 +9,10 @@ volumes:
         labels:
             com.example.es-data.description: "ES data"
             com.example.es-data.department: "DevOps"
+    web-data:
+        labels:
+            com.example.web-data.description: "Web data"
+            com.example.web-data.department: "DevOps"
 
 #networks:
 #    front:
@@ -34,6 +38,7 @@ services:
         network_mode: "host"
         volumes:
             - "/QA_files:/QA_files:rw"
+            - "web-data:/web_static"
         environment:
             TZ: Asia/Shanghai
         #logging:

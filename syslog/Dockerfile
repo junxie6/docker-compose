@@ -25,10 +25,11 @@ RUN chmod 755 /usr/local/bin/main \
   && groupadd -r -g 600 webadmin \
   && groupadd -r -g 601 jboss \
   && useradd -r -u 601 -g 601 -s /sbin/nologin -c 'web user' jboss \
-  && usermod -aG webadmin jboss \
-  && mkdir /ASDF \
-  && touch /ASDF/a.txt \
-  && echo hihi /ASDF/b.txt
+  && usermod -aG webadmin jboss
+  #&& mkdir /web_static \
+  #&& chown jboss:jboss /web_static \
+  #&& touch /web_static/a.txt \
+  #&& echo mydate: $(date) >> /web_static/b.txt
 
 USER jboss
 
