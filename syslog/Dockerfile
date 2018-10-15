@@ -17,7 +17,7 @@ RUN echo $TZ > /etc/timezone \
 
 #
 RUN apt-get -y update \
-  && apt-get -y install vim tree git curl htop less wget procps iproute dnsutils netcat-openbsd ca-certificates \
+  && apt-get -y install vim tree git curl htop less wget procps iproute dnsutils netcat-openbsd ca-certificates acl \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/*
 
@@ -29,7 +29,8 @@ RUN groupadd -r -g 600 webadmin \
 
 #
 RUN mkdir -p $STATIC_DIR \
-  && chown jboss:webadmin $STATIC_DIR
+  && chown jboss:webadmin $STATIC_DIR \
+  && chmod 2750 $STATIC_DIR
 
 #
 COPY main /usr/local/bin

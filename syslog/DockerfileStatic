@@ -15,6 +15,7 @@ RUN groupadd -r -g 600 webadmin \
 #
 RUN mkdir -p $STATIC_DIR \
   && chown jboss:webadmin $STATIC_DIR \
+  && chmod 2750 $STATIC_DIR \
   && mkdir -p $APP_DIR
 
 #
@@ -25,6 +26,8 @@ RUN find /app -exec chown jboss:webadmin -- '{}' + \
 
 #
 USER jboss
+
+WORKDIR $STATIC_DIR
 
 ENTRYPOINT ["/app/static_entry.sh"]
 
