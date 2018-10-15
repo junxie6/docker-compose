@@ -28,8 +28,7 @@ RUN groupadd -r -g 600 webadmin \
   && usermod -aG webadmin jboss
 
 #
-RUN mkdir -p $APP_DIR \
-  && mkdir -p $STATIC_DIR \
+RUN mkdir -p $STATIC_DIR \
   && chown jboss:webadmin $STATIC_DIR
 
 #
