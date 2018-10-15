@@ -2,7 +2,9 @@ FROM alpine:latest
 
 RUN apk --no-cache add ca-certificates shadow
 
-ENV STATIC_PATH /app/data
+#
+ENV APP_DIR /app
+ENV STATIC_DIR /web_static
 
 #
 RUN groupadd -r -g 600 webadmin \
@@ -11,20 +13,17 @@ RUN groupadd -r -g 600 webadmin \
   && usermod -aG webadmin jboss
 
 #
-RUN mkdir -p $STATIC_PATH \
-  && mkdir -p /web_static \
-  && chown jboss:webadmin /web_static
+RUN mkdir -p $APP_DIR \
+  && mkdir -p $STATIC_DIR \
+  && chown jboss:webadmin $STATIC_DIR
 
-COPY app $STATIC_PATH
-COPY static_entry.sh /app
+#
+COPY app $APP_DIR
 
 RUN find /app -exec chown jboss:webadmin -- '{}' + \
   && chmod u+x /app/static_entry.sh
 
-#VOLUME /web_static
-
-#RUN chown jboss:webadmin /web_static
-
+#
 USER jboss
 
 ENTRYPOINT ["/app/static_entry.sh"]

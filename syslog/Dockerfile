@@ -4,7 +4,9 @@ FROM ubuntu:16.04
 
 #
 ENV TZ Asia/Shanghai
+ENV STATIC_DIR /web_static
 
+#
 RUN echo $TZ > /etc/timezone \
   && apt-get -y update && apt-get install -y tzdata \
   && rm /etc/localtime \
@@ -19,18 +21,23 @@ RUN apt-get -y update \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/*
 
-COPY main /usr/local/bin
-
-RUN chmod 755 /usr/local/bin/main \
-  && groupadd -r -g 600 webadmin \
+#
+RUN groupadd -r -g 600 webadmin \
   && groupadd -r -g 601 jboss \
   && useradd -r -u 601 -g 601 -s /sbin/nologin -c 'web user' jboss \
   && usermod -aG webadmin jboss
-  #&& mkdir /web_static \
-  #&& chown jboss:jboss /web_static \
-  #&& touch /web_static/a.txt \
-  #&& echo mydate: $(date) >> /web_static/b.txt
 
+#
+RUN mkdir -p $APP_DIR \
+  && mkdir -p $STATIC_DIR \
+  && chown jboss:webadmin $STATIC_DIR
+
+#
+COPY main /usr/local/bin
+
+RUN chmod 755 /usr/local/bin/main
+
+#
 USER jboss
 
 CMD ["/usr/local/bin/main"]
