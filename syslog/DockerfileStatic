@@ -2,6 +2,8 @@ FROM alpine:latest
 
 RUN apk --no-cache add ca-certificates shadow
 
+#RUN apk --no-cache add mysql-client
+
 #
 ENV APP_DIR /app
 ENV STATIC_DIR /web_static
