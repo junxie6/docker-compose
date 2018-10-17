@@ -6,7 +6,7 @@ FROM ubuntu:16.04
 ENV TZ Asia/Shanghai
 ENV STATIC_DIR /web_static
 
-#
+# Set timezone
 RUN echo $TZ > /etc/timezone \
   && apt-get -y update && apt-get install -y tzdata \
   && rm /etc/localtime \

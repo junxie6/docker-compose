@@ -1,20 +1,26 @@
 FROM alpine:latest
 
-RUN apk --no-cache add ca-certificates shadow
+RUN apk --no-cache add tzdata ca-certificates shadow
 
 #RUN apk --no-cache add mysql-client
 
 #
+ENV TZ Asia/Shanghai
 ENV APP_DIR /app
 ENV STATIC_DIR /web_static
 
-#
+# Set system user and group
 RUN groupadd -r -g 600 webadmin \
   && groupadd -r -g 601 jboss \
   && useradd -r -u 601 -g 601 -s /sbin/nologin -c 'web user' jboss \
   && usermod -aG webadmin jboss
 
-#
+# Set timezone
+RUN echo $TZ > /etc/timezone \
+  && rm /etc/localtime \
+  && ln -snf /usr/share/zoneinfo/$TZ /etc/localtime
+
+# Set image specific config
 RUN mkdir -p $STATIC_DIR \
   && chown jboss:webadmin $STATIC_DIR \
   && chmod 2750 $STATIC_DIR \
