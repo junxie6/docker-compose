@@ -29,8 +29,8 @@ networks:
 services:
     mysql-master:
         hostname: "mysql-master.local"
-        #image: "mysql:5.7"
-        image: "junhsieh/exp-mysql:5.7"
+        image: "mysql:5.7"
+        #image: "junhsieh/exp-mysql:5.7"
         volumes:
             - "mysql-master-data:/var/lib/mysql"
             - "mysql-master-config:/etc/mysql"
@@ -45,8 +45,8 @@ services:
         #restart: "always"
     mysql-slave:
         hostname: "mysql-slave.local"
-        #image: "mysql:5.7"
-        image: "junhsieh/exp-mysql:5.7"
+        image: "mysql:5.7"
+        #image: "junhsieh/exp-mysql:5.7"
         volumes:
             - "mysql-slave-data:/var/lib/mysql"
             - "mysql-slave-config:/etc/mysql"
