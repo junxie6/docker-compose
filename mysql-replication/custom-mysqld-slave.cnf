@@ -7,9 +7,13 @@ max_connections = 200
 
 server_id = 2
 
+### Enabling crash-safe slaves
 master_info_repository = TABLE
 
+###
 relay_log = /var/log/mysql/mysql-slave-relay-bin
+
+### Enabling crash-safe slaves
 relay_log_info_repository = TABLE
 relay_log_recovery = ON
 
@@ -24,3 +28,6 @@ slave_compressed_protocol = 1
 ### Tells the slave server not to start the slave threads when the server starts. To start the threads later, use a START SLAVE statement.
 skip_slave_start
 
+### Prevent users to write data on slave database
+read_only = 1
+#super_read_only = 1
