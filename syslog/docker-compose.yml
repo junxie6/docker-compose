@@ -46,7 +46,7 @@ services:
             - "/QA_files:/QA_files:rw"
             - "web-data:/web_static"
         environment:
-            TZ: Asia/Shanghai
+            - TZ=Asia/Shanghai
         #logging:
         ##    driver: "syslog"
         #    options:

@@ -39,7 +39,7 @@ services:
         ports:
             - "3307:3306"
         environment:
-            MYSQL_ROOT_PASSWORD: foo
+            - MYSQL_ROOT_PASSWORD=foo
         #entrypoint: "sh"
         #tty: true
         #restart: "always"
@@ -55,7 +55,7 @@ services:
         ports:
             - "3308:3306"
         environment:
-            MYSQL_ROOT_PASSWORD: foo
+            - MYSQL_ROOT_PASSWORD=foo
         #entrypoint: "sh"
         #tty: true
         #restart: "always"

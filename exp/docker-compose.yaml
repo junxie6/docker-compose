@@ -24,7 +24,7 @@ services:
         networks:
             - "back"
         environment:
-            MYSQL_ROOT_PASSWORD: "foo"
+            - MYSQL_ROOT_PASSWORD=foo
     dru1:
         #hostname: "php1.local"
         image: "junhsieh/docker-php-fpm"
