@@ -1,0 +1,25 @@
+filebeat.inputs:
+  - type: syslog
+    protocol.udp:
+      host: "localhost:9000"
+
+#output.file:
+#  path: "/tmp/filebeat"
+#  filename: filebeat
+
+#filebeat.config:
+#  prospectors:
+#    path: ${path.config}/prospectors.d/*.yml
+#    reload.enabled: false
+#  modules:
+#    path: ${path.config}/modules.d/*.yml
+#    reload.enabled: false
+
+#processors:
+#- add_cloud_metadata:
+#
+
+output.elasticsearch:
+  hosts: ['127.0.0.1:9200']
+#  username: elastic
+#  password: changeme
