@@ -27,7 +27,12 @@ services:
             - "prometheus-data:/prometheus"
         #environment:
         #    - TZ=Asia/Shanghai
-        #command:
+        command:
+            - --web.listen-address=0.0.0.0:9090
+            - --config.file=/etc/prometheus/prometheus.yml
+            - --storage.tsdb.path=/prometheus
+            - --web.console.libraries=/usr/share/prometheus/console_libraries
+            - --web.console.templates=/usr/share/prometheus/consoles
         restart: always
     grafana:
         image: "grafana/grafana:5.3.2"
