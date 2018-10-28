@@ -1,0 +1,38 @@
+version: "3.7" # https://docs.docker.com/compose/compose-file/
+
+volumes:
+    prometheus-config:
+        labels:
+            com.example.prometheus-config.description: "Prometheus config"
+            com.example.prometheus-config.department: "DevOps"
+    prometheus-data:
+        labels:
+            com.example.prometheus-data.description: "Prometheus data"
+            com.example.prometheus-data.department: "DevOps"
+    grafana-config:
+        labels:
+            com.example.grafana-config.description: "Grafana config"
+            com.example.grafana-config.department: "DevOps"
+    grafana-data:
+        labels:
+            com.example.grafana-data.description: "Grafana data"
+            com.example.grafana-data.department: "DevOps"
+
+services:
+    prometheus:
+        image: "prom/prometheus:v2.4.3"
+        network_mode: "host"
+        volumes:
+            - "prometheus-config:/etc/prometheus"
+            - "prometheus-data:/prometheus"
+        #environment:
+        #    - TZ=Asia/Shanghai
+        #command:
+        restart: always
+    grafana:
+        image: "grafana/grafana:5.3.2"
+        network_mode: "host"
+        volumes:
+            - "grafana-config:/etc/grafana"
+            - "grafana-data:/var/lib/grafana"
+        restart: always
