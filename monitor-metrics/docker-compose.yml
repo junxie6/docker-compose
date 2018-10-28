@@ -17,6 +17,14 @@ volumes:
         labels:
             com.example.grafana-data.description: "Grafana data"
             com.example.grafana-data.department: "DevOps"
+    filebeat-data:
+        labels:
+            com.example.filebeat-data.description: "Filebeat data"
+            com.example.filebeat-data.department: "DevOps"
+    elasticsearch-data:
+        labels:
+            com.example.elasticsearch-data.description: "Elasticsearch data"
+            com.example.elasticsearch-data.department: "DevOps"
 
 services:
     prometheus:
@@ -40,4 +48,20 @@ services:
         volumes:
             - "grafana-config:/etc/grafana"
             - "grafana-data:/var/lib/grafana"
+        restart: always
+    filebeat:
+        image: "docker.elastic.co/beats/filebeat-oss:6.4.2"
+        network_mode: "host"
+        volumes:
+            - "filebeat-data:/usr/share/filebeat/data:rw"
+            - "/var/lib/docker/containers:/usr/share/filebeat/dockerlogs:ro"
+            - "/var/run/docker.sock:/var/run/docker.sock:ro"
+        restart: always
+        build:
+            context: ./filebeat
+    elasticsearch:
+        image: "docker.elastic.co/elasticsearch/elasticsearch-oss:6.4.2"
+        network_mode: "host"
+        volumes:
+            - "elasticsearch-data:/usr/share/elasticsearch/data"
         restart: always
