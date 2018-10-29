@@ -17,6 +17,10 @@ volumes:
         labels:
             com.example.grafana-data.description: "Grafana data"
             com.example.grafana-data.department: "DevOps"
+    #alertmanager-config:
+    #    labels:
+    #        com.example.alertmanager-config.description: "Alertmanager config"
+    #        com.example.alertmanager-config.department: "DevOps"
     filebeat-data:
         labels:
             com.example.filebeat-data.description: "Filebeat data"
@@ -42,11 +46,11 @@ services:
             - --web.console.libraries=/usr/share/prometheus/console_libraries
             - --web.console.templates=/usr/share/prometheus/consoles
         restart: always
-        logging:
-            driver: "syslog"
-            options:
-                syslog-address: "udp://127.0.0.1:9000"
-                tag: "app-prometheus"
+        #logging:
+        #    driver: "syslog"
+        #    options:
+        #        syslog-address: "udp://127.0.0.1:9000"
+        #        tag: "app-prometheus"
     grafana:
         image: "grafana/grafana:5.3.2"
         network_mode: "host"
@@ -54,6 +58,12 @@ services:
             - "grafana-config:/etc/grafana"
             - "grafana-data:/var/lib/grafana"
         restart: always
+    #alertmanager:
+    #    image: "prom/alertmanager:v0.15.2"
+    #    network_mode: "host"
+    #    volumes:
+    #        - "alertmanager-config:/etc/alertmanager"
+    #    restart: always
     filebeat:
         image: "docker.elastic.co/beats/filebeat-oss:6.4.2"
         network_mode: "host"
