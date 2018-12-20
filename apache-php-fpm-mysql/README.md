@@ -1,1 +1,3 @@
-# make rebuild-all
+### Get started
+
+$ make rebuild-all
