@@ -41,6 +41,6 @@ services:
         image: "httpd:2.4.37"
         network_mode: "host"
         volumes:
-            - "php-data:/usr/local/apache2/htdocs"
+            - "php-data:/var/www/html"
         restart: always
 
