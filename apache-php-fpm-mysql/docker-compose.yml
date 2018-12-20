@@ -1,0 +1,46 @@
+version: "3.7" # https://docs.docker.com/compose/compose-file/
+
+# Reference:
+# https://blog.ijun.org/2017/07/running-php-fpm-in-docker-based-on.html
+
+volumes:
+    mysql-config:
+        labels:
+            com.example.mysql-config.description: "MySQL config"
+            com.example.mysql-config.department: "DevOps"
+    mysql-data:
+        labels:
+            com.example.mysql-data.description: "MySQL datadir"
+            com.example.mysql-data.department: "DevOps"
+    php-data:
+        labels:
+            com.example.php-data.description: "PHP data"
+            com.example.php-data.department: "DevOps"
+
+services:
+    mysql:
+        image: "mysql:8.0.13"
+        network_mode: "host"
+        volumes:
+            - "mysql-config:/etc/mysql"
+            - "mysql-data:/var/lib/mysql"
+        environment:
+            #- TZ=Asia/Shanghai
+            #- MYSQL_ROOT_PASSWORD=foo
+            - MYSQL_ALLOW_EMPTY_PASSWORD=true
+        #command: mysqld --skip-grant-tables
+        command: mysqld --bind-address=127.0.0.1 --port=3309 --mysqlx-bind-address=127.0.0.1 --mysqlx-port=33090
+        restart: always
+    php:
+        image: "php:7.2.13-fpm-stretch"
+        network_mode: "host"
+        volumes:
+            - "php-data:/var/www/html"
+        restart: always
+    apache:
+        image: "httpd:2.4.37"
+        network_mode: "host"
+        volumes:
+            - "php-data:/usr/local/apache2/htdocs"
+        restart: always
+
