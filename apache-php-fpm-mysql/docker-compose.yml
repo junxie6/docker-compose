@@ -6,24 +6,24 @@ version: "3.7" # https://docs.docker.com/compose/compose-file/
 volumes:
     mysql-config:
         labels:
-            com.example.mysql-config.description: "MySQL config"
-            com.example.mysql-config.department: "DevOps"
+            com.example.mysql-config.description: MySQL config
+            com.example.mysql-config.department: DevOps
     mysql-data:
         labels:
-            com.example.mysql-data.description: "MySQL datadir"
-            com.example.mysql-data.department: "DevOps"
+            com.example.mysql-data.description: MySQL datadir
+            com.example.mysql-data.department: DevOps
     php-data:
         labels:
-            com.example.php-data.description: "PHP data"
-            com.example.php-data.department: "DevOps"
+            com.example.php-data.description: PHP data
+            com.example.php-data.department: DevOps
 
 services:
     mysql:
-        image: "mysql:8.0.13"
-        network_mode: "host"
+        image: mysql:8.0.13
+        network_mode: host
         volumes:
-            - "mysql-config:/etc/mysql"
-            - "mysql-data:/var/lib/mysql"
+            - mysql-config:/etc/mysql
+            - mysql-data:/var/lib/mysql
         environment:
             #- TZ=Asia/Shanghai
             #- MYSQL_ROOT_PASSWORD=foo
@@ -37,20 +37,20 @@ services:
             network: host
             dockerfile: image/php/Dockerfile
             args:
-                MODE: "${MODE}"
-        image: "${PHP_TAG}"
-        network_mode: "host"
+                MODE: ${MODE}
+        image: ${PHP_TAG}
+        network_mode: host
         volumes:
-            - "php-data:/var/www/html"
+            - php-data:/var/www/html
         restart: always
     apache:
         build:
             context: .
             network: host
             dockerfile: image/apache/Dockerfile
-        image: "${APACHE_TAG}"
-        network_mode: "host"
+        image: ${APACHE_TAG}
+        network_mode: host
         volumes:
-            - "php-data:/var/www/html"
+            - php-data:/var/www/html
         restart: always
 
