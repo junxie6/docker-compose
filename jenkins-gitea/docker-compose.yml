@@ -13,6 +13,10 @@ volumes:
         labels:
             com.example.gitea-data.description: Gitea datadir
             com.example.gitea-data.department: DevOps
+    jenkins-data:
+        labels:
+            com.example.jenkins-data.description: Jenkins datadir
+            com.example.jenkins-data.department: DevOps
 
 services:
     mysql:
@@ -49,3 +53,13 @@ services:
         sysctls:
             - net.ipv4.ip_unprivileged_port_start=80
             - net.ipv6.conf.all.disable_ipv6=1
+    jenkins:
+        build:
+            context: .
+            network: host
+            dockerfile: image/jenkins/Dockerfile
+        image: ${JENKINS_TAG}
+        network_mode: host
+        volumes:
+            - jenkins-data:/var/jenkins_home
+        restart: always
