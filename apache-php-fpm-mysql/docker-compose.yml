@@ -44,7 +44,11 @@ services:
             - "php-data:/var/www/html"
         restart: always
     apache:
-        image: "httpd:2.4.37"
+        build:
+            context: .
+            network: host
+            dockerfile: image/apache/Dockerfile
+        image: "${APACHE_TAG}"
         network_mode: "host"
         volumes:
             - "php-data:/var/www/html"
