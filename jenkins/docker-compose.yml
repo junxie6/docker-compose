@@ -1,0 +1,48 @@
+version: "3.7" # https://docs.docker.com/compose/compose-file/
+
+volumes:
+    mysql-config:
+        labels:
+            com.example.mysql-config.description: MySQL config
+            com.example.mysql-config.department: DevOps
+    mysql-data:
+        labels:
+            com.example.mysql-data.description: MySQL datadir
+            com.example.mysql-data.department: DevOps
+    gitea-data:
+        labels:
+            com.example.gitea-data.description: Gitea datadir
+            com.example.gitea-data.department: DevOps
+
+services:
+    mysql:
+        image: mysql:8.0.13
+        network_mode: host
+        volumes:
+            - mysql-config:/etc/mysql
+            - mysql-data:/var/lib/mysql
+        environment:
+            #- TZ=Asia/Shanghai
+            #- MYSQL_ALLOW_EMPTY_PASSWORD=true
+            - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+            - MYSQL_DATABASE=${MYSQL_DATABASE}
+            - MYSQL_USER=${MYSQL_USER}
+            - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+        #command: mysqld --skip-grant-tables
+        command: mysqld --bind-address=127.0.0.1 --port=3309 --mysqlx-bind-address=127.0.0.1 --mysqlx-port=33090
+        restart: always
+    gitea:
+        build:
+            context: .
+            network: host
+            dockerfile: image/gitea/Dockerfile
+            args:
+                SSH_PORT: ${SSH_PORT}
+        image: ${GITEA_TAG}
+        network_mode: host
+        volumes:
+            - gitea-data:/data
+        #ports:
+        #    - 3000:3000
+        #    - 8022:22
+        restart: always
