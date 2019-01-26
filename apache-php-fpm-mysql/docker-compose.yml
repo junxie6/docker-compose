@@ -32,7 +32,13 @@ services:
         command: mysqld --bind-address=127.0.0.1 --port=3309 --mysqlx-bind-address=127.0.0.1 --mysqlx-port=33090
         restart: always
     php:
-        image: "php:7.3.1-fpm-stretch"
+        build:
+            context: .
+            network: host
+            dockerfile: image/php/Dockerfile
+            args:
+                MODE: "${MODE}"
+        image: "${PHP_TAG}"
         network_mode: "host"
         volumes:
             - "php-data:/var/www/html"

@@ -1,6 +1,9 @@
 SHELL = /bin/bash -o pipefail
 
+include .env
+
 ROOT_DIR = $(CURDIR)
+DOCKER_IMAGE_DIR = $(ROOT_DIR)/image
 
 rebuild-all: rebuild-mysql rebuild-php rebuild-apache
 
@@ -8,14 +11,8 @@ rebuild-mysql:
 	cd $(ROOT_DIR) && docker-compose rm -sf "mysql" && docker-compose up -d --no-deps --build "mysql"
 
 rebuild-php:
+	cd $(ROOT_DIR) && docker-compose build php
 	cd $(ROOT_DIR) && docker-compose rm -sf "php" && docker-compose up -d --no-deps --build "php"
-	cd $(ROOT_DIR) && docker cp resources/php/www.conf apache-php-fpm-mysql_php_1:/usr/local/etc/php-fpm.d/www.conf
-	cd $(ROOT_DIR) && docker-compose exec php chown root:staff /usr/local/etc/php-fpm.d/www.conf
-	cd $(ROOT_DIR) && docker cp resources/php/php.ini-development apache-php-fpm-mysql_php_1:/usr/local/etc/php/php.ini
-	cd $(ROOT_DIR) && docker-compose exec php chown root:staff /usr/local/etc/php/php.ini
-	cd $(ROOT_DIR) && docker cp resources/php/demo.php apache-php-fpm-mysql_php_1:/var/www/html/demo.php
-	cd $(ROOT_DIR) && docker-compose exec php chown root:www-data /var/www/html/demo.php
-	cd $(ROOT_DIR) && docker-compose restart "php"
 
 rebuild-apache:
 	cd $(ROOT_DIR) && docker-compose rm -sf "apache" && docker-compose up -d --no-deps --build "apache"
@@ -26,3 +23,4 @@ rebuild-apache:
 	cd $(ROOT_DIR) && docker cp resources/apache/httpd-vhosts.conf apache-php-fpm-mysql_apache_1:/usr/local/apache2/conf/extra/httpd-vhosts.conf
 	cd $(ROOT_DIR) && docker-compose exec apache chown root:www-data /usr/local/apache2/conf/extra/httpd-vhosts.conf
 	cd $(ROOT_DIR) && docker-compose restart "apache"
+
