@@ -20,7 +20,7 @@ $ vim /etc/docker/daemon.json
 
 ```
 $ git clone https://github.com/junxie6/docker-compose.git
-$ cd docker-compose/jenkins
+$ cd docker-compose/jenkins-gitea
 $ cp .env.dist .env
 $ make rebuild-all
 ```
