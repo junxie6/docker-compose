@@ -29,6 +29,7 @@ $ sudo vim /etc/hosts
 ```
 $ git clone https://github.com/junxie6/docker-compose.git
 $ cd docker-compose/apache-php-fpm-mysql
+$ cp .env.dist .env
 $ make rebuild-all
 $ curl http://dummy-host2.example.com/demo.php
 ```
