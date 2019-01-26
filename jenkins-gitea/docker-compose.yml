@@ -41,7 +41,7 @@ services:
             network: host
             dockerfile: image/gitea/Dockerfile
             args:
-                SSH_PORT: ${SSH_PORT}
+                GITEA_SSH_PORT: ${GITEA_SSH_PORT}
         image: ${GITEA_TAG}
         network_mode: host
         volumes:
