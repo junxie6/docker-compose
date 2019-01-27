@@ -15,6 +15,18 @@ volumes:
         labels:
             com.example.gitea-data.description: Gitea datadir
             com.example.gitea-data.department: DevOps
+    gitlab-data:
+        labels:
+            com.example.gitlab-data.description: Gitlab datadir
+            com.example.gitlab-data.department: DevOps
+    gitlab-config:
+        labels:
+            com.example.gitlab-config.description: Gitlab config
+            com.example.gitlab-config.department: DevOps
+    gitlab-log:
+        labels:
+            com.example.gitlab-log.description: Gitlab log
+            com.example.gitlab-log.department: DevOps
     jenkins-data:
         labels:
             com.example.jenkins-data.description: Jenkins datadir
@@ -73,3 +85,40 @@ services:
             - VIRTUAL_HOST=jenkins.local
             - VIRTUAL_PORT=8080
         restart: always
+    #gitlab:
+    #    build:
+    #        context: .
+    #        network: host
+    #        dockerfile: image/gitlab/Dockerfile
+    #        args:
+    #            GITLAB_SSH_PORT: ${GITLAB_SSH_PORT}
+    #    image: ${GITLAB_TAG}
+    #    network_mode: host
+    #    volumes:
+    #        - gitlab-data:/var/opt/gitlab
+    #        - gitlab-log:/var/log/gitlab
+    #        - gitlab-config:/etc/gitlab
+    #    environment:
+    #        GITLAB_OMNIBUS_CONFIG: 'from_file(''/omnibus_config.rb'')'
+    #    restart: always
+    #    sysctls:
+    #        - net.ipv4.ip_unprivileged_port_start=80
+    #        - net.ipv6.conf.all.disable_ipv6=1
+    #    configs:
+    #        - {source: gitlab, target: /omnibus_config.rb}
+    #    secrets:
+    #        - gitlab_root_password
+    #gitlab-runner:
+    #    image: 'gitlab/gitlab-runner:alpine'
+    #    network_mode: host
+    #    deploy:
+    #        mode: replicated
+    #        replicas: 4
+
+configs:
+    gitlab:
+        file: ./gitlab.rb
+
+secrets:
+    gitlab_root_password:
+        file: ./root_password.txt
