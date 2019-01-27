@@ -1,5 +1,7 @@
 version: "3.7" # https://docs.docker.com/compose/compose-file/
 
+# NOTE: VIRTUAL_HOST jwilder/nginx-proxy
+
 volumes:
     mysql-config:
         labels:
