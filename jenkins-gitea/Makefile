@@ -12,3 +12,6 @@ rebuild-mysql:
 
 rebuild-gitea:
 	cd $(ROOT_DIR) && docker-compose rm -sf "gitea" && docker-compose up -d --no-deps --build "gitea"
+
+rebuild-jenkins:
+	cd $(ROOT_DIR) && docker-compose rm -sf "jenkins" && docker-compose up -d --no-deps --build "jenkins"

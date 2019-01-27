@@ -61,6 +61,8 @@ services:
             context: .
             network: host
             dockerfile: image/jenkins/Dockerfile
+            args:
+                GO_VERSION: ${GO_VERSION}
         image: ${JENKINS_TAG}
         network_mode: host
         volumes:
