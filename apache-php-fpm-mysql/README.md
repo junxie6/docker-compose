@@ -11,9 +11,13 @@ $ vim /etc/docker/daemon.json
 
 {
   "bridge": "none",
-  "dns": ["8.8.8.8"],
+  "dns": ["8.8.8.8", "8.8.4.4"],
   "ipv6": false
 }
+```
+
+```
+$ sudo systemctl restart docker.service
 ```
 
 #### Hosts setting
