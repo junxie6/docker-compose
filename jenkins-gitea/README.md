@@ -41,7 +41,7 @@ User a browser to access http://127.0.0.1:3000
 
 ### Set up webhook on Gitea's repository setting
 
-1. Repoistory &gt; Settings &gt; Webhooks &gt;
+1. Repoistory &gt; Settings &gt; Webhooks
 
 2. Target URL
 
