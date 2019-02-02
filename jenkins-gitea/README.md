@@ -33,7 +33,7 @@ User a browser to access http://127.0.0.1:3000
 
 ### Set up webhook
 
-Manage Jenkins > Manage Plugin > Generic Webhook Trigger Plugin
+Manage Jenkins &gt; Manage Plugin &gt; Generic Webhook Trigger Plugin
 
 http://gitea.local:8080/generic-webhook-trigger/invoke?token=TOKEN_HERE
 
