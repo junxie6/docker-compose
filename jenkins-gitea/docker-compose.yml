@@ -32,10 +32,25 @@ volumes:
             com.example.jenkins-data.description: Jenkins datadir
             com.example.jenkins-data.department: DevOps
 
+networks:
+    back:
+        driver: bridge
+        ipam:
+            config:
+                - subnet: 192.168.4.8/29
+
 services:
     mysql:
-        image: mysql:8.0.13
-        network_mode: host
+        build:
+            context: .
+            #network: host
+            dockerfile: image/mysql/Dockerfile
+            args:
+                MYSQL_TAG: ${MYSQL_TAG}
+        image: ${PROJECT_NAME}/${MYSQL_TAG}
+        #network_mode: host
+        networks:
+            - back
         volumes:
             - mysql-config:/etc/mysql
             - mysql-data:/var/lib/mysql
@@ -47,26 +62,28 @@ services:
             - MYSQL_USER=${MYSQL_USER}
             - MYSQL_PASSWORD=${MYSQL_PASSWORD}
         #command: mysqld --skip-grant-tables
-        command: mysqld --bind-address=127.0.0.1 --port=3309 --mysqlx-bind-address=127.0.0.1 --mysqlx-port=33090
+        #command: mysqld --bind-address=127.0.0.1 --port=3309 --mysqlx-bind-address=127.0.0.1 --mysqlx-port=33090
         restart: always
     gitea:
         build:
             context: .
-            network: host
+            #network: host
             dockerfile: image/gitea/Dockerfile
             args:
                 GITEA_TAG: ${GITEA_TAG}
                 GITEA_SSH_PORT: ${GITEA_SSH_PORT}
         image: ${PROJECT_NAME}/${GITEA_TAG}
-        network_mode: host
+        #network_mode: host
+        networks:
+            - back
         volumes:
             - gitea-data:/data
         environment:
             - VIRTUAL_HOST=gitea.local
             - VIRTUAL_PORT=3000
-        #ports:
-        #    - 3000:3000
-        #    - 8022:22
+        ports:
+            - "3000:3000"
+            - "8022:22"
         restart: always
         sysctls:
             - net.ipv4.ip_unprivileged_port_start=80
@@ -74,16 +91,20 @@ services:
     jenkins:
         build:
             context: .
-            network: host
+            #network: host
             dockerfile: image/jenkins/Dockerfile
             args:
                 GO_VERSION: ${GO_VERSION}
                 JENKINS_TAG: ${JENKINS_TAG}
                 JENKINS_USER: ${JENKINS_USER}
         image: ${PROJECT_NAME}/${JENKINS_TAG}
-        network_mode: host
+        #network_mode: host
+        networks:
+            - back
         volumes:
             - jenkins-data:/var/jenkins_home
+        ports:
+            - "8080:8080"
         environment:
             - VIRTUAL_HOST=jenkins.local
             - VIRTUAL_PORT=8080
