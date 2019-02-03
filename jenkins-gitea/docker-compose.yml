@@ -15,18 +15,18 @@ volumes:
         labels:
             com.example.gitea-data.description: Gitea datadir
             com.example.gitea-data.department: DevOps
-    gitlab-data:
-        labels:
-            com.example.gitlab-data.description: Gitlab datadir
-            com.example.gitlab-data.department: DevOps
-    gitlab-config:
-        labels:
-            com.example.gitlab-config.description: Gitlab config
-            com.example.gitlab-config.department: DevOps
-    gitlab-log:
-        labels:
-            com.example.gitlab-log.description: Gitlab log
-            com.example.gitlab-log.department: DevOps
+    #gitlab-data:
+    #    labels:
+    #        com.example.gitlab-data.description: Gitlab datadir
+    #        com.example.gitlab-data.department: DevOps
+    #gitlab-config:
+    #    labels:
+    #        com.example.gitlab-config.description: Gitlab config
+    #        com.example.gitlab-config.department: DevOps
+    #gitlab-log:
+    #    labels:
+    #        com.example.gitlab-log.description: Gitlab log
+    #        com.example.gitlab-log.department: DevOps
     jenkins-data:
         labels:
             com.example.jenkins-data.description: Jenkins datadir
@@ -62,7 +62,7 @@ services:
             - MYSQL_USER=${MYSQL_USER}
             - MYSQL_PASSWORD=${MYSQL_PASSWORD}
         #command: mysqld --skip-grant-tables
-        #command: mysqld --bind-address=127.0.0.1 --port=3309 --mysqlx-bind-address=127.0.0.1 --mysqlx-port=33090
+        command: mysqld --bind-address=0.0.0.0 --port=3306 --mysqlx-bind-address=127.0.0.1 --mysqlx-port=33060
         restart: always
     gitea:
         build:
