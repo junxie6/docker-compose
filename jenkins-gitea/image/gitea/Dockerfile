@@ -1,9 +1,7 @@
 ARG GITEA_TAG
-ARG GITEA_SSH_PORT
-
 FROM ${GITEA_TAG}
 
-RUN sed -i -e "s/^Port 22$/Port ${GITEA_SSH_PORT}/" /etc/ssh/sshd_config
+ARG GITEA_SSH_PORT
 
-#EXPOSE ${GITEA_SSH_PORT} 3000
+RUN sed -i -e "s/^Port 22$/Port ${GITEA_SSH_PORT}/" /etc/ssh/sshd_config
 

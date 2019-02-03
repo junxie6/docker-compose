@@ -1,8 +1,8 @@
-ARG GO_VERSION
 ARG JENKINS_TAG
-ARG user=jenkins
+FROM ${JENKINS_TAG}
 
-FROM jenkins/jenkins:2.161
+ARG JENKINS_USER
+ARG GO_VERSION
 
 ENV PATH ${PATH}:/usr/local/go/bin
 
@@ -13,4 +13,4 @@ RUN rm -rf /usr/local/go \
     && tar -zxvf go.tar.gz -C /usr/local \
     && rm -f go.tar.gz
 
-USER ${user}
+USER ${JENKINS_USER}

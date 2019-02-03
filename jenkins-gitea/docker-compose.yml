@@ -79,6 +79,7 @@ services:
             args:
                 GO_VERSION: ${GO_VERSION}
                 JENKINS_TAG: ${JENKINS_TAG}
+                JENKINS_USER: ${JENKINS_USER}
         image: ${PROJECT_NAME}/${JENKINS_TAG}
         network_mode: host
         volumes:
