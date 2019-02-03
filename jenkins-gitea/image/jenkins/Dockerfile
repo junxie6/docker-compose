@@ -1,7 +1,8 @@
-FROM jenkins/jenkins:2.161
-
 ARG GO_VERSION
+ARG JENKINS_TAG
 ARG user=jenkins
+
+FROM jenkins/jenkins:2.161
 
 ENV PATH ${PATH}:/usr/local/go/bin
 

@@ -55,8 +55,9 @@ services:
             network: host
             dockerfile: image/gitea/Dockerfile
             args:
+                GITEA_TAG: ${GITEA_TAG}
                 GITEA_SSH_PORT: ${GITEA_SSH_PORT}
-        image: ${GITEA_TAG}
+        image: ${PROJECT_NAME}/${GITEA_TAG}
         network_mode: host
         volumes:
             - gitea-data:/data
@@ -77,7 +78,8 @@ services:
             dockerfile: image/jenkins/Dockerfile
             args:
                 GO_VERSION: ${GO_VERSION}
-        image: ${JENKINS_TAG}
+                JENKINS_TAG: ${JENKINS_TAG}
+        image: ${PROJECT_NAME}/${JENKINS_TAG}
         network_mode: host
         volumes:
             - jenkins-data:/var/jenkins_home
