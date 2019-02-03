@@ -1,6 +1,7 @@
-FROM gitea/gitea:1.7.0
-
+ARG GITEA_TAG
 ARG GITEA_SSH_PORT
+
+FROM ${GITEA_TAG}
 
 RUN sed -i -e "s/^Port 22$/Port ${GITEA_SSH_PORT}/" /etc/ssh/sshd_config
 
