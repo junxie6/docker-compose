@@ -82,10 +82,8 @@ services:
             - VIRTUAL_HOST=gitea.local
             - VIRTUAL_PORT=3000
         ports:
-            - published: 3000
-              target: 3000
-            - published: 8022
-              target: 22
+            - "3000:3000"
+            - "8022:22"
         restart: always
         sysctls:
             - net.ipv4.ip_unprivileged_port_start=80
@@ -106,8 +104,7 @@ services:
         volumes:
             - jenkins-data:/var/jenkins_home
         ports:
-            - published: 8080
-              target: 8080
+            - "8080:8080"
         environment:
             - VIRTUAL_HOST=jenkins.local
             - VIRTUAL_PORT=8080
