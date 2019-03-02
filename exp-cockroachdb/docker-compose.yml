@@ -29,6 +29,8 @@ services:
             - cockroach1-data:/cockroach/cockroach-data
         networks:
             - back
+        ports:
+            - "8080:8080"
         stop_grace_period: 60s
         command: start --join=cockroach1:26257,cockroach2:26257,cockroach3:26257 --cache=.25 --max-sql-memory=.25 --logtostderr --insecure
         deploy:
