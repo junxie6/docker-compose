@@ -23,42 +23,71 @@ networks:
 
 services:
     cockroach1:
+        hostname: cockroach1
         image: cockroachdb/cockroach:v2.1.4
         volumes:
             - cockroach1-data:/cockroach/cockroach-data
         networks:
             - back
         stop_grace_period: 60s
-        command: start --insecure
+        command: start --join=cockroach1:26257,cockroach2:26257,cockroach3:26257 --cache=.25 --max-sql-memory=.25 --logtostderr --insecure
         deploy:
+            #mode: global
             replicas: 1
+            resources:
+                limits:
+                    cpus: "1.5"
+                    memory: 2048M
+                reservations:
+                    cpus: "1.0"
+                    memory: 1024M
             placement:
                 constraints:
                     - node.hostname == docker1
-                    #- node.role == manager
+                    #- node.role != manager
     cockroach2:
+        hostname: cockroach2
         image: cockroachdb/cockroach:v2.1.4
         volumes:
             - cockroach2-data:/cockroach/cockroach-data
         networks:
             - back
         stop_grace_period: 60s
-        command: start --insecure
+        command: start --join=cockroach1:26257,cockroach2:26257,cockroach3:26257 --cache=.25 --max-sql-memory=.25 --logtostderr --insecure
         deploy:
+            #mode: global
             replicas: 1
+            resources:
+                limits:
+                    cpus: "1.5"
+                    memory: 2048M
+                reservations:
+                    cpus: "1.0"
+                    memory: 1024M
             placement:
                 constraints:
                     - node.hostname == docker2
+                    #- node.role != manager
     cockroach3:
+        hostname: cockroach3
         image: cockroachdb/cockroach:v2.1.4
         volumes:
             - cockroach3-data:/cockroach/cockroach-data
         networks:
             - back
         stop_grace_period: 60s
-        command: start --insecure
+        command: start --join=cockroach1:26257,cockroach2:26257,cockroach3:26257 --cache=.25 --max-sql-memory=.25 --logtostderr --insecure
         deploy:
+            #mode: global
             replicas: 1
+            resources:
+                limits:
+                    cpus: "1.5"
+                    memory: 2048M
+                reservations:
+                    cpus: "1.0"
+                    memory: 1024M
             placement:
                 constraints:
                     - node.hostname == docker3
+                    #- node.role != manager
