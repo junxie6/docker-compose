@@ -1,0 +1,64 @@
+version: "3.7" # https://docs.docker.com/compose/compose-file/
+
+volumes:
+    cockroach1-data:
+        labels:
+            com.example.cockroach1-data.description: CockroachDB data
+            com.example.cockroach1-data.department: DevOps
+    cockroach2-data:
+        labels:
+            com.example.cockroach2-data.description: CockroachDB data
+            com.example.cockroach2-data.department: DevOps
+    cockroach3-data:
+        labels:
+            com.example.cockroach3-data.description: CockroachDB data
+            com.example.cockroach3-data.department: DevOps
+
+networks:
+    back:
+        driver: overlay
+        #ipam:
+        #    config:
+        #        - subnet: 192.168.5.0/28
+
+services:
+    cockroach1:
+        image: cockroachdb/cockroach:v2.1.4
+        volumes:
+            - cockroach1-data:/cockroach/cockroach-data
+        networks:
+            - back
+        stop_grace_period: 60s
+        command: start --insecure
+        deploy:
+            replicas: 1
+            placement:
+                constraints:
+                    - node.hostname == docker1
+                    #- node.role == manager
+    cockroach2:
+        image: cockroachdb/cockroach:v2.1.4
+        volumes:
+            - cockroach2-data:/cockroach/cockroach-data
+        networks:
+            - back
+        stop_grace_period: 60s
+        command: start --insecure
+        deploy:
+            replicas: 1
+            placement:
+                constraints:
+                    - node.hostname == docker2
+    cockroach3:
+        image: cockroachdb/cockroach:v2.1.4
+        volumes:
+            - cockroach3-data:/cockroach/cockroach-data
+        networks:
+            - back
+        stop_grace_period: 60s
+        command: start --insecure
+        deploy:
+            replicas: 1
+            placement:
+                constraints:
+                    - node.hostname == docker3
