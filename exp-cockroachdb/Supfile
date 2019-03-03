@@ -22,4 +22,4 @@ networks:
 commands:
     hello:
         desc: Hello world
-        run: echo 'hello' > /hello.txt
+        run: echo 'hello' > /tmp/hello.txt && echo hihi
