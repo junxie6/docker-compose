@@ -24,7 +24,7 @@ networks:
 services:
     cockroach1:
         hostname: cockroach1
-        image: cockroachdb/cockroach:v2.1.4
+        image: cockroachdb/cockroach:v2.1.5
         volumes:
             - cockroach1-data:/cockroach/cockroach-data
         networks:
@@ -52,7 +52,7 @@ services:
                     #- node.role != manager
     cockroach2:
         hostname: cockroach2
-        image: cockroachdb/cockroach:v2.1.4
+        image: cockroachdb/cockroach:v2.1.5
         volumes:
             - cockroach2-data:/cockroach/cockroach-data
         networks:
@@ -78,7 +78,7 @@ services:
                     #- node.role != manager
     cockroach3:
         hostname: cockroach3
-        image: cockroachdb/cockroach:v2.1.4
+        image: cockroachdb/cockroach:v2.1.5
         volumes:
             - cockroach3-data:/cockroach/cockroach-data
         networks:
