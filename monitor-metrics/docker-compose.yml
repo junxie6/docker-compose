@@ -58,7 +58,13 @@ services:
         #        syslog-address: "udp://127.0.0.1:9000"
         #        tag: "app-prometheus"
     grafana:
-        image: "grafana/grafana:5.3.2"
+        build:
+            context: .
+            #network: host
+            dockerfile: image/grafana/Dockerfile
+            args:
+                GRAFANA_TAG: ${GRAFANA_TAG}
+        image: ${PROJECT_NAME}/${GRAFANA_TAG}
         network_mode: "host"
         volumes:
             - "grafana-config:/etc/grafana"
