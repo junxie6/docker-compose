@@ -1,10 +1,10 @@
 version: "3.7" # https://docs.docker.com/compose/compose-file/
 
 volumes:
-    prometheus-config:
-        labels:
-            com.example.prometheus-config.description: "Prometheus config"
-            com.example.prometheus-config.department: "DevOps"
+    #prometheus-config:
+    #    labels:
+    #        com.example.prometheus-config.description: "Prometheus config"
+    #        com.example.prometheus-config.department: "DevOps"
     prometheus-data:
         labels:
             com.example.prometheus-data.description: "Prometheus data"
@@ -41,7 +41,7 @@ services:
         image: ${PROJECT_NAME}/${PROMETHEUS_TAG}
         network_mode: "host"
         volumes:
-            - "prometheus-config:/etc/prometheus"
+            #- "prometheus-config:/etc/prometheus"
             - "prometheus-data:/prometheus"
         #environment:
         #    - TZ=Asia/Shanghai
