@@ -32,7 +32,13 @@ volumes:
 
 services:
     prometheus:
-        image: "prom/prometheus:v2.4.3"
+        build:
+            context: .
+            #network: host
+            dockerfile: image/prometheus/Dockerfile
+            args:
+                PROMETHEUS_TAG: ${PROMETHEUS_TAG}
+        image: ${PROJECT_NAME}/${PROMETHEUS_TAG}
         network_mode: "host"
         volumes:
             - "prometheus-config:/etc/prometheus"
