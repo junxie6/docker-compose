@@ -97,6 +97,10 @@ services:
     #        - "alertmanager-config:/etc/alertmanager"
     #    restart: always
     filebeat:
+        build:
+            context: ./filebeat
+            #network: host
+            dockerfile: image/filebeat/Dockerfile
         image: "docker.elastic.co/beats/filebeat-oss:6.4.2"
         network_mode: "host"
         volumes:
@@ -104,9 +108,6 @@ services:
             #- "/var/lib/docker/containers:/usr/share/filebeat/dockerlogs:ro"
             #- "/var/run/docker.sock:/var/run/docker.sock:ro"
         restart: always
-        build:
-            context: ./filebeat
-            dockerfile: Dockerfile
     elasticsearch:
         image: "docker.elastic.co/elasticsearch/elasticsearch-oss:6.4.2"
         network_mode: "host"
