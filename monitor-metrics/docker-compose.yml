@@ -88,7 +88,7 @@ services:
             - mssql-data:/var/opt/mssql
         environment:
             - ACCEPT_EULA=Y
-            - SA_PASSWORD=Change_Admin_Pass6
+            - SA_PASSWORD=${SA_PASSWORD}
             - MSSQL_PID=Developer
         restart: always
     #alertmanager:
