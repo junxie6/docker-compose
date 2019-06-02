@@ -17,6 +17,10 @@ volumes:
         labels:
             com.example.grafana-data.description: "Grafana data"
             com.example.grafana-data.department: "DevOps"
+    mssql-data:
+        labels:
+            com.example.mssql-data.description: "MS SQL data"
+            com.example.mssql-data.department: "DevOps"
     #alertmanager-config:
     #    labels:
     #        com.example.alertmanager-config.description: "Alertmanager config"
@@ -69,6 +73,22 @@ services:
         volumes:
             - "grafana-config:/etc/grafana"
             - "grafana-data:/var/lib/grafana"
+        restart: always
+    mssql:
+        build:
+            context: .
+            #network: host
+            dockerfile: image/mssql/Dockerfile
+            args:
+                MSSQL_TAG: ${MSSQL_TAG}
+        image: ${PROJECT_NAME}/${MSSQL_TAG}
+        network_mode: "host"
+        volumes:
+            - "mssql-data:/var/opt/mssql"
+        environment:
+            - ACCEPT_EULA=Y
+            - SA_PASSWORD=Change_Admin_Pass6
+            - MSSQL_PID=Developer
         restart: always
     #alertmanager:
     #    image: "prom/alertmanager:v0.15.2"
