@@ -45,8 +45,8 @@ services:
         image: ${PROJECT_NAME}/${PROMETHEUS_TAG}
         network_mode: "host"
         volumes:
-            #- "prometheus-config:/etc/prometheus"
-            - "prometheus-data:/prometheus"
+            #- prometheus-config:/etc/prometheus
+            - prometheus-data:/prometheus
         #environment:
         #    - TZ=Asia/Shanghai
         command:
@@ -71,8 +71,8 @@ services:
         image: ${PROJECT_NAME}/${GRAFANA_TAG}
         network_mode: "host"
         volumes:
-            - "grafana-config:/etc/grafana"
-            - "grafana-data:/var/lib/grafana"
+            - grafana-config:/etc/grafana
+            - grafana-data:/var/lib/grafana
         restart: always
     mssql:
         build:
@@ -85,7 +85,7 @@ services:
         image: ${PROJECT_NAME}/${MSSQL_TAG}
         network_mode: "host"
         volumes:
-            - "mssql-data:/var/opt/mssql"
+            - mssql-data:/var/opt/mssql
         environment:
             - ACCEPT_EULA=Y
             - SA_PASSWORD=Change_Admin_Pass6
@@ -109,7 +109,7 @@ services:
         image: ${PROJECT_NAME}/${FILEBEAT_TAG}
         network_mode: "host"
         volumes:
-            - "filebeat-data:/usr/share/filebeat/data:rw"
+            - filebeat-data:/usr/share/filebeat/data:rw
             #- "/var/lib/docker/containers:/usr/share/filebeat/dockerlogs:ro"
             #- "/var/run/docker.sock:/var/run/docker.sock:ro"
         restart: always
