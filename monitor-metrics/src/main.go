@@ -43,7 +43,7 @@ func observer() {
 			"hostname": hostname,
 		}).Set(float64(value))
 
-		time.Sleep(1 * time.Second)
+		time.Sleep(10 * time.Second)
 	}
 }
 

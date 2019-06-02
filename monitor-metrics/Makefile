@@ -13,6 +13,9 @@ run-node-exporter:
 	--web.listen-address=127.0.0.1:9100 \
 	--collector.filesystem.ignored-fs-types="^(autofs|cifs|nfs4)$$"
 
+demo-sql-create-table:
+	bash -c "for i in {1..1}; do docker exec monitor-metrics_mssql_1 /opt/mssql-tools/bin/sqlcmd -S 127.0.0.1 -U SA -P Change_Admin_Pass6 -Q 'USE [exp]; CREATE TABLE [dbo].[Bug]([BugID] [bigint] IDENTITY(1,1) NOT NULL, [Subject] [nchar](32) NOT NULL, [CreatedDT] [datetime] NOT NULL) ON [PRIMARY]' && sleep 1 ; done"
+
 demo-sql-select-version:
 	bash -c "for i in {1..1}; do docker exec monitor-metrics_mssql_1 /opt/mssql-tools/bin/sqlcmd -S 127.0.0.1 -U SA -P Change_Admin_Pass6 -Q 'SELECT @@VERSION, GETDATE()' && sleep 1 ; done"
 
