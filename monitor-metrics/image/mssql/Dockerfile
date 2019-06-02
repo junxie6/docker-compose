@@ -1,3 +1,4 @@
+ARG MSSQL_URL
 ARG MSSQL_TAG
-FROM mcr.microsoft.com/mssql/${MSSQL_TAG}
+FROM ${MSSQL_URL}${MSSQL_TAG}
 

@@ -80,6 +80,7 @@ services:
             #network: host
             dockerfile: image/mssql/Dockerfile
             args:
+                MSSQL_URL: ${MSSQL_URL}
                 MSSQL_TAG: ${MSSQL_TAG}
         image: ${PROJECT_NAME}/${MSSQL_TAG}
         network_mode: "host"
@@ -98,10 +99,14 @@ services:
     #    restart: always
     filebeat:
         build:
-            context: ./filebeat
+            context: .
             #network: host
             dockerfile: image/filebeat/Dockerfile
-        image: "docker.elastic.co/beats/filebeat-oss:6.4.2"
+            args:
+                FILEBEAT_URL: ${FILEBEAT_URL}
+                FILEBEAT_TAG: ${FILEBEAT_TAG}
+        #image: "docker.elastic.co/beats/filebeat-oss:6.4.2"
+        image: ${PROJECT_NAME}/${FILEBEAT_TAG}
         network_mode: "host"
         volumes:
             - "filebeat-data:/usr/share/filebeat/data:rw"
