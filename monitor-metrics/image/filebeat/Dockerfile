@@ -5,8 +5,7 @@ FROM ${FILEBEAT_URL}${FILEBEAT_TAG}
 USER root
 
 # Copy our custom configuration file
-COPY filebeat.yml /usr/share/filebeat/filebeat.yml
-COPY image/filebeat/resource/filebeat.yml /etc/prometheus/prometheus.yml
+COPY image/filebeat/resource/filebeat.yml /usr/share/filebeat/filebeat.yml
 
 # Create a directory to map volume with all docker log files
 #RUN mkdir -p /usr/share/filebeat/dockerlogs
