@@ -19,8 +19,8 @@ demo-sql-create-table:
 demo-sql-select-version:
 	bash -c "for i in {1..1}; do docker exec monitor-metrics_mssql_1 /opt/mssql-tools/bin/sqlcmd -S 127.0.0.1 -U SA -P Change_Admin_Pass6 -Q 'SELECT @@VERSION, GETDATE()' && sleep 1 ; done"
 
-demo-sql-select-count:
-	bash -c "for i in {1..1}; do docker exec monitor-metrics_mssql_1 /opt/mssql-tools/bin/sqlcmd -S 127.0.0.1 -U SA -P Change_Admin_Pass6 -Q 'SELECT @@VERSION, GETDATE()' && sleep 1 ; done"
+demo-sql-select:
+	bash -c "for i in {1..1}; do docker exec monitor-metrics_mssql_1 /opt/mssql-tools/bin/sqlcmd -S 127.0.0.1 -U SA -P Change_Admin_Pass6 -Q 'SELECT TOP 10 * FROM [exp].[dbo].[Bug] ORDER BY [CreatedDT] DESC' && sleep 1 ; done"
 
 demo-sql-insert:
 	for i in {1..10}; do docker exec monitor-metrics_mssql_1 /opt/mssql-tools/bin/sqlcmd -S 127.0.0.1 -U SA -P Change_Admin_Pass6 -Q "INSERT INTO [exp].[dbo].[Bug] ([Subject], [CreatedDT]) VALUES ('test', GETDATE());"  && sleep 1 ; done \

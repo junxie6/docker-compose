@@ -9,10 +9,10 @@ volumes:
         labels:
             com.example.prometheus-data.description: "Prometheus data"
             com.example.prometheus-data.department: "DevOps"
-    grafana-config:
-        labels:
-            com.example.grafana-config.description: "Grafana config"
-            com.example.grafana-config.department: "DevOps"
+    #grafana-config:
+    #    labels:
+    #        com.example.grafana-config.description: "Grafana config"
+    #        com.example.grafana-config.department: "DevOps"
     grafana-data:
         labels:
             com.example.grafana-data.description: "Grafana data"
@@ -71,7 +71,7 @@ services:
         image: ${PROJECT_NAME}/${GRAFANA_TAG}
         network_mode: "host"
         volumes:
-            - grafana-config:/etc/grafana
+            #- grafana-config:/etc/grafana
             - grafana-data:/var/lib/grafana
         restart: always
     mssql:
