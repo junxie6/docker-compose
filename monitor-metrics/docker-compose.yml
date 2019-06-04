@@ -103,7 +103,6 @@ services:
             #network: host
             dockerfile: image/filebeat/Dockerfile
             args:
-                FILEBEAT_URL: ${FILEBEAT_URL}
                 FILEBEAT_TAG: ${FILEBEAT_TAG}
         image: ${PROJECT_NAME}/${FILEBEAT_TAG}
         network_mode: "host"
