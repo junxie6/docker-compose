@@ -21,13 +21,20 @@ bin/elasticsearch-setup-passwords interactive
 
 ```
 dexec elasticsearch bash
-vim config/elasticsearch.yml
+
+vi config/elasticsearch.yml
+
 xpack.security.enabled: true
+
+exit
+
+drestart elasticsearch
 ```
 
 ```
-dexec -u root kibana bash
-vim config/kibana.yml
+dexec kibana bash
+
+vi config/kibana.yml
 
 elasticsearch.username: "kibana"
 elasticsearch.password: "kibanapassword"
@@ -40,7 +47,7 @@ drestart kibana
 ```
 dexec logstash bash
 
-vim config/logstash.yml
+vi config/logstash.yml
 ```
 
 ```
