@@ -105,7 +105,6 @@ services:
             args:
                 FILEBEAT_URL: ${FILEBEAT_URL}
                 FILEBEAT_TAG: ${FILEBEAT_TAG}
-        #image: "docker.elastic.co/beats/filebeat-oss:6.4.2"
         image: ${PROJECT_NAME}/${FILEBEAT_TAG}
         network_mode: "host"
         volumes:
@@ -114,8 +113,37 @@ services:
             #- "/var/run/docker.sock:/var/run/docker.sock:ro"
         restart: always
     elasticsearch:
-        image: "docker.elastic.co/elasticsearch/elasticsearch-oss:6.4.2"
+        build:
+            context: .
+            #network: host
+            dockerfile: image/elasticsearch/Dockerfile
+            args:
+                ELASTICSEARCH_TAG: ${ELASTICSEARCH_TAG}
+        image: ${PROJECT_NAME}/${ELASTICSEARCH_TAG}
         network_mode: "host"
         volumes:
             - "elasticsearch-data:/usr/share/elasticsearch/data"
+        environment:
+            # For production mode:
+            #- cluster.initial_master_nodes=elasticsearch
+            # For development mode:
+            - discovery.type=single-node
+        ulimits:
+            memlock:
+                soft: -1
+                hard: -1
+        restart: always
+    kibana:
+        build:
+            context: .
+            #network: host
+            dockerfile: image/kibana/Dockerfile
+            args:
+                KIBANA_TAG: ${KIBANA_TAG}
+        image: ${PROJECT_NAME}/${KIBANA_TAG}
+        network_mode: "host"
+        environment:
+            - SERVER_NAME=kibana
+            - ELASTICSEARCH_HOSTS=http://127.0.0.1:9200
+            - XPACK_MONITORING_ENABLED=true
         restart: always
