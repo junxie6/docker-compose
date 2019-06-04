@@ -36,3 +36,9 @@ exit
 
 drestart kibana
 ```
+
+```
+dexec logstash bash
+
+vim config/logstash.yml
+```

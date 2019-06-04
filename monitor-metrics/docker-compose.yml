@@ -147,3 +147,13 @@ services:
             - ELASTICSEARCH_HOSTS=http://127.0.0.1:9200
             - XPACK_MONITORING_ENABLED=true
         restart: always
+    logstash:
+        build:
+            context: .
+            #network: host
+            dockerfile: image/logstash/Dockerfile
+            args:
+                LOGSTASH_TAG: ${LOGSTASH_TAG}
+        image: ${PROJECT_NAME}/${LOGSTASH_TAG}
+        network_mode: "host"
+        restart: always
