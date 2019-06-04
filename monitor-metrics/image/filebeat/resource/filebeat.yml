@@ -1,7 +1,7 @@
 filebeat.inputs:
   - type: syslog
     protocol.udp:
-      host: "localhost:9000"
+      host: ":9000"
 
 #output.file:
 #  path: "/tmp/filebeat"

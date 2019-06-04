@@ -44,6 +44,10 @@ vim config/logstash.yml
 ```
 
 ```
+$ nc -zv -u 127.0.0.1 9000
+```
+
+```
 $ logger --server 127.0.0.1 --port 9000 --udp --rfc3164 "my testing msg"
 $ curl -u elastic:elastic -X GET "localhost:9200/filebeat-*/_search"
 ```
