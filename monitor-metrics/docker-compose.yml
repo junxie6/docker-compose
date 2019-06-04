@@ -123,6 +123,7 @@ services:
         volumes:
             - "elasticsearch-data:/usr/share/elasticsearch/data"
         environment:
+            # TODO: need cluster for production. Try it!
             # For production mode:
             #- cluster.initial_master_nodes=elasticsearch
             # For development mode:
