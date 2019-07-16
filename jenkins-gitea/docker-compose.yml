@@ -47,7 +47,7 @@ services:
             dockerfile: image/mysql/Dockerfile
             args:
                 MYSQL_TAG: ${MYSQL_TAG}
-        image: ${PROJECT_NAME}/${MYSQL_TAG}
+        image: ${COMPOSE_PROJECT_NAME}/${MYSQL_TAG}
         #network_mode: host
         networks:
             - back
@@ -74,7 +74,7 @@ services:
             args:
                 GITEA_TAG: ${GITEA_TAG}
                 GITEA_SSH_PORT: ${GITEA_SSH_PORT}
-        image: ${PROJECT_NAME}/${GITEA_TAG}
+        image: ${COMPOSE_PROJECT_NAME}/${GITEA_TAG}
         #network_mode: host
         networks:
             - back
@@ -99,7 +99,7 @@ services:
                 GO_VERSION: ${GO_VERSION}
                 JENKINS_TAG: ${JENKINS_TAG}
                 JENKINS_USER: ${JENKINS_USER}
-        image: ${PROJECT_NAME}/${JENKINS_TAG}
+        image: ${COMPOSE_PROJECT_NAME}/${JENKINS_TAG}
         #network_mode: host
         networks:
             - back

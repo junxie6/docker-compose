@@ -42,7 +42,7 @@ services:
             dockerfile: image/prometheus/Dockerfile
             args:
                 PROMETHEUS_TAG: ${PROMETHEUS_TAG}
-        image: ${PROJECT_NAME}/${PROMETHEUS_TAG}
+        image: ${COMPOSE_PROJECT_NAME}/${PROMETHEUS_TAG}
         network_mode: "host"
         volumes:
             #- prometheus-config:/etc/prometheus
@@ -68,7 +68,7 @@ services:
             dockerfile: image/grafana/Dockerfile
             args:
                 GRAFANA_TAG: ${GRAFANA_TAG}
-        image: ${PROJECT_NAME}/${GRAFANA_TAG}
+        image: ${COMPOSE_PROJECT_NAME}/${GRAFANA_TAG}
         network_mode: "host"
         volumes:
             #- grafana-config:/etc/grafana
@@ -82,7 +82,7 @@ services:
             args:
                 MSSQL_URL: ${MSSQL_URL}
                 MSSQL_TAG: ${MSSQL_TAG}
-        image: ${PROJECT_NAME}/${MSSQL_TAG}
+        image: ${COMPOSE_PROJECT_NAME}/${MSSQL_TAG}
         network_mode: "host"
         volumes:
             - mssql-data:/var/opt/mssql
@@ -104,7 +104,7 @@ services:
             dockerfile: image/filebeat/Dockerfile
             args:
                 FILEBEAT_TAG: ${FILEBEAT_TAG}
-        image: ${PROJECT_NAME}/${FILEBEAT_TAG}
+        image: ${COMPOSE_PROJECT_NAME}/${FILEBEAT_TAG}
         network_mode: "host"
         volumes:
             - filebeat-data:/usr/share/filebeat/data:rw
@@ -118,7 +118,7 @@ services:
             dockerfile: image/elasticsearch/Dockerfile
             args:
                 ELASTICSEARCH_TAG: ${ELASTICSEARCH_TAG}
-        image: ${PROJECT_NAME}/${ELASTICSEARCH_TAG}
+        image: ${COMPOSE_PROJECT_NAME}/${ELASTICSEARCH_TAG}
         network_mode: "host"
         volumes:
             - "elasticsearch-data:/usr/share/elasticsearch/data"
@@ -140,7 +140,7 @@ services:
             dockerfile: image/kibana/Dockerfile
             args:
                 KIBANA_TAG: ${KIBANA_TAG}
-        image: ${PROJECT_NAME}/${KIBANA_TAG}
+        image: ${COMPOSE_PROJECT_NAME}/${KIBANA_TAG}
         network_mode: "host"
         environment:
             - SERVER_NAME=kibana
@@ -154,6 +154,6 @@ services:
             dockerfile: image/logstash/Dockerfile
             args:
                 LOGSTASH_TAG: ${LOGSTASH_TAG}
-        image: ${PROJECT_NAME}/${LOGSTASH_TAG}
+        image: ${COMPOSE_PROJECT_NAME}/${LOGSTASH_TAG}
         network_mode: "host"
         restart: always
