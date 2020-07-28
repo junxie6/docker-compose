@@ -1,9 +1,14 @@
+# Reference:
+# https://github.com/just-containers/base-alpine
+# https://github.com/just-containers/s6-overlay/blob/master/builder/overlay-rootfs/usr/bin/with-contenv
 FROM alpine:3.12.0
 
 ARG S6_OVERLAY_RELEASE=https://github.com/just-containers/s6-overlay/releases/latest/download/s6-overlay-amd64.tar.gz
 ENV S6_OVERLAY_RELEASE=${S6_OVERLAY_RELEASE}
 
 ADD image/goapp/rootfs /
+ADD image/goapp/goapp /etc/services.d
+ADD image/goapp/srv_out /goapp
 
 # s6 overlay Download
 ADD ${S6_OVERLAY_RELEASE} /tmp/s6overlay.tar.gz
