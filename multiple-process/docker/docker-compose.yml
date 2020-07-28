@@ -24,7 +24,8 @@ services:
     image: ${COMPOSE_PROJECT_NAME}/${GO_VERSION}
     #network_mode: host
     networks:
-      - back
+      back:
+        ipv4_address: 169.254.9.2
     ports:
       - "80:80"
     volumes:
