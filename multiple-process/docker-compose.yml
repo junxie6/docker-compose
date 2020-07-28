@@ -1,0 +1,32 @@
+version: "3.7" # https://docs.docker.com/compose/compose-file/
+
+volumes:
+  goapp-var:
+    labels:
+      com.example.goapp-var.description: GoApp var
+      com.example.goapp-var.department: DevOps
+
+networks:
+  back:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 169.254.9.0/28
+
+services:
+  goapp:
+    build:
+      context: .
+      #network: host
+      dockerfile: image/goapp/Dockerfile
+      args:
+        GO_VERSION: ${GO_VERSION}
+    image: ${COMPOSE_PROJECT_NAME}/${GO_VERSION}
+    #network_mode: host
+    networks:
+      - back
+    ports:
+      - "80:80"
+    volumes:
+      - goapp-var:/var
+    restart: always

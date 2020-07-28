@@ -1,0 +1,2 @@
+#!/usr/bin/with-contenv /bin/sh
+cd /goapp && /goapp/goapp
