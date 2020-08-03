@@ -10,11 +10,15 @@ ADD image/goapp/rootfs /
 ADD image/goapp/goapp /etc/services.d/goapp
 ADD image/goapp/srv_out /goapp
 
+# TODO: Add logrotate command and its config
+
 # s6 overlay Download
 ADD ${S6_OVERLAY_RELEASE} /tmp/s6overlay.tar.gz
 
 # Build and some of image configuration
 RUN apk upgrade --update --no-cache \
+    && apk add --no-cache logrotate \
+    && apk add --no-cache iproute2 tcptraceroute util-linux bind-tools \
     && rm -rf /var/cache/apk/* \
     && tar xzf /tmp/s6overlay.tar.gz -C / \
     && rm /tmp/s6overlay.tar.gz

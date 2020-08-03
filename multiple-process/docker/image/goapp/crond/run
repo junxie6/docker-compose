@@ -1,0 +1,2 @@
+#!/usr/bin/with-contenv /bin/sh
+crond -c /etc/crontabs -f -l 0 -d 0 -L /var/lib/proj/log/crond.log
