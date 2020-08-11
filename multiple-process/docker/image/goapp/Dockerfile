@@ -7,10 +7,16 @@ ARG S6_OVERLAY_RELEASE=https://github.com/just-containers/s6-overlay/releases/la
 ENV S6_OVERLAY_RELEASE=${S6_OVERLAY_RELEASE}
 
 ADD image/goapp/rootfs /
-ADD image/goapp/goapp /etc/services.d/goapp
-ADD image/goapp/srv_out /goapp
 
 # TODO: Add logrotate command and its config
+ADD image/goapp/logrotate.sample.conf /goapp/logrotate.conf
+
+# Add services
+ADD image/goapp/services.d/cron /etc/services.d/cron
+ADD image/goapp/services.d/goapp /etc/services.d/goapp
+
+#
+ADD image/goapp/srv_out /goapp
 
 # s6 overlay Download
 ADD ${S6_OVERLAY_RELEASE} /tmp/s6overlay.tar.gz
