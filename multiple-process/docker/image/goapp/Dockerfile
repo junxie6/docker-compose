@@ -12,6 +12,8 @@ ADD image/goapp/rootfs /
 ADD image/goapp/logrotate.sample.conf /goapp/logrotate.conf
 ADD image/goapp/logrotate /etc/periodic/15min
 
+RUN chmod 750 /etc/periodic/15min/logrotate
+
 # Add services
 ADD image/goapp/services.d/cron /etc/services.d/cron
 ADD image/goapp/services.d/goapp /etc/services.d/goapp
