@@ -8,3 +8,7 @@ RUN yum -y install cmake boost-devel libuuid-devel pkgconfig gcc-c++ make ruby h
 RUN yum -y install cyrus-sasl-devel cyrus-sasl-md5 cyrus-sasl-plain nss-devel nspr-devel
 
 RUN yum -y git
+
+RUN yum -y install libdb-cxx-devel libaio-devel
+
+RUN yum -y install openssl-devel
