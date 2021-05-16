@@ -14,8 +14,10 @@ services:
             #network: host
             dockerfile: image/qpid-cpp-broker/Dockerfile
             args:
-                UBUNTU_TAG: ${UBUNTU_TAG}
-        image: ${COMPOSE_PROJECT_NAME}/${UBUNTU_TAG}
+                CENTOS_TAG: ${CENTOS_TAG}
+        image: ${COMPOSE_PROJECT_NAME}/${CENTOS_TAG}
         networks:
             - back
+        ports:
+            - "5672:5672"
         tty: true
