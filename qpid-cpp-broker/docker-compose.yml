@@ -1,0 +1,21 @@
+version: "3.7" # https://docs.docker.com/compose/compose-file/
+
+networks:
+    back:
+        driver: bridge
+        ipam:
+            config:
+                - subnet: 169.254.5.16/28
+
+services:
+    qpid-cpp-broker:
+        build:
+            context: .
+            #network: host
+            dockerfile: image/qpid-cpp-broker/Dockerfile
+            args:
+                UBUNTU_TAG: ${UBUNTU_TAG}
+        image: ${COMPOSE_PROJECT_NAME}/${UBUNTU_TAG}
+        networks:
+            - back
+        tty: true
