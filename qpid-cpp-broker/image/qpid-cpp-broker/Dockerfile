@@ -12,3 +12,6 @@ RUN yum -y git
 RUN yum -y install libdb-cxx-devel libaio-devel
 
 RUN yum -y install openssl-devel
+
+RUN yum -y install git gcc gcc-c++ cmake make swig pkgconfig libuuid-devel openssl-devel python-devel python2-devel python3-devel cyrus-sasl-devel \
+    boost-devel boost-filesystem boost-program-options cyrus-sasl-lib libaio-devel libdb4-cxx-devel libibverbs-devel librdmacm-devel nspr-devel nss-devel pkgconfig python-setuptools xerces-c-devel xqilla-devel ruby ruby-devel
