@@ -1,0 +1,24 @@
+version: "3.7" # https://docs.docker.com/compose/compose-file/
+
+networks:
+    back:
+        driver: bridge
+        ipam:
+            config:
+                - subnet: 169.254.5.32/28
+
+services:
+    nats:
+        build:
+            context: .
+            #network: host
+            dockerfile: image/nats/Dockerfile
+            args:
+                NATS_TAG: ${NATS_TAG}
+        image: ${COMPOSE_PROJECT_NAME}/${NATS_TAG}
+        networks:
+            - back
+        ports:
+            - "4222:4222"
+            - "6222:6222"
+            - "8222:8222"
