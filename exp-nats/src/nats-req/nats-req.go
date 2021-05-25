@@ -15,19 +15,19 @@ package main
 
 import (
 	"flag"
-	"fmt"
 	"log"
 	"os"
+	"time"
 
 	"github.com/nats-io/nats.go"
 )
 
 // NOTE: Can test with demo servers.
-// nats-pub -s demo.nats.io <subject> <msg>
-// nats-pub -s demo.nats.io:4443 <subject> <msg> (TLS version)
+// nats-req -s demo.nats.io <subject> <msg>
+// nats-req -s demo.nats.io:4443 <subject> <msg> (TLS version)
 
 func usage() {
-	log.Printf("Usage: nats-pub [-s server] [-creds file] <subject> <msg>\n")
+	log.Printf("Usage: nats-req [-s server] [-creds file] <subject> <msg>\n")
 	flag.PrintDefaults()
 }
 
@@ -50,12 +50,12 @@ func main() {
 	}
 
 	args := flag.Args()
-	if len(args) != 2 {
+	if len(args) < 2 {
 		showUsageAndExit(1)
 	}
 
 	// Connect Options.
-	opts := []nats.Option{nats.Name("NATS Sample Publisher")}
+	opts := []nats.Option{nats.Name("NATS Sample Requestor")}
 
 	// Use UserCredentials
 	if *userCreds != "" {
@@ -68,17 +68,16 @@ func main() {
 		log.Fatal(err)
 	}
 	defer nc.Close()
-	subj, msg := args[0], []byte(args[1])
+	subj, payload := args[0], []byte(args[1])
 
-	for i := 0; i < 10; i++ {
-		msg = []byte(fmt.Sprintf("msg %d", i))
-		nc.Publish(subj, msg)
+	msg, err := nc.Request(subj, payload, 2*time.Second)
+	if err != nil {
+		if nc.LastError() != nil {
+			log.Fatalf("%v for request", nc.LastError())
+		}
+		log.Fatalf("%v for request", err)
 	}
-	nc.Flush()
 
-	if err := nc.LastError(); err != nil {
-		log.Fatal(err)
-	} else {
-		log.Printf("Published [%s] : '%s'\n", subj, msg)
-	}
+	log.Printf("Published [%s] : '%s'", subj, payload)
+	log.Printf("Received  [%v] : '%s'", msg.Subject, string(msg.Data))
 }
