@@ -16,6 +16,8 @@ services:
             args:
                 ALPINE_tag: ${ALPINE_tag}
                 APP_NAME: ${APP_NAME}
+                USER_ID: ${USER_ID}
+                USERNAME: ${USERNAME}
         image: ${COMPOSE_PROJECT_NAME}/${APP_NAME}
         volumes:
             - ..:/${APP_NAME}
