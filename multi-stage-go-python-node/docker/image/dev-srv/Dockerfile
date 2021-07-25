@@ -29,5 +29,6 @@ COPY --from=golang:1.16.6-alpine3.14 /usr/local/go /usr/local/go
 # Install Angular
 RUN npm install -g --silent @angular/cli@12.1.3
 
+#
 USER ${USERNAME}
 WORKDIR /${APP_NAME}
