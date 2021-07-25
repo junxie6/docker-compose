@@ -1,0 +1,29 @@
+version: "3.7" # https://docs.docker.com/compose/compose-file/
+
+networks:
+    back:
+        driver: bridge
+        ipam:
+            config:
+                - subnet: 169.254.5.32/28
+
+services:
+    dev-srv:
+        build:
+            context: .
+            #network: host
+            dockerfile: image/dev-srv/Dockerfile
+            args:
+                ALPINE_tag: ${ALPINE_tag}
+                APP_NAME: ${APP_NAME}
+        image: ${COMPOSE_PROJECT_NAME}/${APP_NAME}
+        volumes:
+            - ..:/${APP_NAME}
+        networks:
+            - back
+        tty: true
+        #ports:
+        #    - "4222:4222"
+        #    - "6222:6222"
+        #    - "8222:8222"
+
