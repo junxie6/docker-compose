@@ -13,7 +13,11 @@ ENV REFRESHED_AT=2021-07-25 \
     PATH=/usr/local/go/bin:$PATH
 
 # Install some packages
-RUN apk upgrade --update --no-cache \
+# The -e causes the command to stop on any errors. A more typical syntax is to separate commands with && to stop on any error.
+# The -x causes the shell to output each command being run. This is useful for debugging scripts.
+# https://stackoverflow.com/questions/47143319/what-does-set-x-do-in-dockerfile
+RUN set -ex \
+    && apk upgrade --update --no-cache \
     && apk add --no-cache make \
     # install ca-certificates so that HTTPS works consistently
     && apk add --no-cache ca-certificates \
